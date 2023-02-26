@@ -1,0 +1,3 @@
+{
+    "recommendations": ["ms-dotnettools.csharp", "adrianwilczynski.namespace", "Fudge.auto-using", "dbaeumer.vscode-eslint"]
+}
