@@ -7,17 +7,15 @@ services:
       - .env
     volumes:
       - buki-database:/var/lib/mysql
-    ports:
-      - "3306:3306"
   api-dev-container:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ../:/workspaces/buki-app/
-    network_mode: service:database
     command: sleep infinity
     user: root
+    network_mode: service:database
     depends_on:
       - database
 

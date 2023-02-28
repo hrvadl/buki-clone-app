@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/buki-api/buki-api.csproj",
+                "${workspaceFolder}/backend/buki-api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/buki-api/buki-api.csproj"
+                "${workspaceFolder}/backend/buki-api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

@@ -17,8 +17,6 @@
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [5127, 5000],
   // "portsAttributes": {
   //		"5001": {
   //			"protocol": "https"
@@ -38,8 +36,8 @@
         "dbaeumer.vscode-eslint"
       ]
     }
-  }
+  },
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+  "forwardPorts": ["192.168.0.106\n", 5127]
 }
