@@ -1,4 +1,4 @@
-using buki_api.modules.exception;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace buki_api.modules.auth;
 
@@ -6,29 +6,37 @@ namespace buki_api.modules.auth;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly IAuthService _AuthService;
-    public AuthController(IAuthService AuthService)
+    private readonly IAuthService authService;
+    private readonly ITokenService tokenService;
+    public AuthController(IAuthService authService, ITokenService tokenService)
     {
-        this._AuthService = AuthService;
+        this.tokenService = tokenService;
+        this.authService = authService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<string>> test()
-    {
-
-        throw new UnauthorizedException("Unauthorized");
-        return this._AuthService.test();
-    }
-
-    [HttpPost]
+    [HttpPost("sign-up")]
     public async Task<ActionResult<string>> SignUp()
     {
-        return this._AuthService.test();
+        return this.authService.test();
     }
 
-    [HttpPost]
-    public async Task<ActionResult<string>> LogIn()
+    [HttpPost("log-in")]
+    public async Task<IActionResult> LogIn([FromBody] UserDTO user)
     {
-        return this._AuthService.test();
+        var token = this.tokenService.BuildToken(user);
+        return Ok(token);
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult<string>> CheckToken()
+    {
+        return this.authService.test();
+    }
+
+    [HttpGet("test")]
+    public async Task<ActionResult<string>> Test()
+    {
+        return this.authService.test();
     }
 }

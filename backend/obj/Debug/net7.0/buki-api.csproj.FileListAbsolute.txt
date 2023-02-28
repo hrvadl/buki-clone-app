@@ -110,3 +110,11 @@
 /workspaces/buki-app/backend/obj/Debug/net7.0/buki-api.genruntimeconfig.cache
 /workspaces/buki-app/backend/obj/Debug/net7.0/ref/buki-api.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Newtonsoft.Json.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/System.Security.Permissions.dll
