@@ -1,15 +1,14 @@
-# REACT_API_URL=$(hostname -I | awk '{print $1}')
+LOCAL_API_HOST=$(hostname -I | awk '{print $1}')
 
-REACT_API_URL="0.0.0.0"
+# if [ $1 != "android" ] && [ $1 != "ios" ];
+#     then
+#         echo "device should be android or ios"
+#         exit 1;
+# fi  
 
-if [ $1 != "android" ] && [ $1 != "ios" ];
-    then
-        echo "device should be android or ios"
-    else
-        previous_environment=$(cat .env | grep -v REACT_APP_API_URL)
-        rm -rf ./.env && touch ./.env
+previous_environment=$(cat .env | grep -v REACT_APP_API_URL)
+rm -rf ./.env && touch ./.env
 
-        printf "$previous_environment\nREACT_APP_API_URL=http://$REACT_API_URL:5128\n" > ./.env 
+printf "$previous_environment\nREACT_APP_API_URL=http://$LOCAL_API_HOST:5127\n" > ./.env 
 
-        npm run $1
-fi
+npx expo start --clear

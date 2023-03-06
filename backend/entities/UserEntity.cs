@@ -14,7 +14,7 @@ public class UserEntity
 
     public string Email { get; set; } = null!;
 
-    public string Number { get; set; } = null!;
+    public string? Number { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 

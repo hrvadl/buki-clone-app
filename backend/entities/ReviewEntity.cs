@@ -6,11 +6,11 @@ public class ReviewEntity
 
     public string Text { get; set; } = null!;
 
-    public UserEntity Author { get; set; } = null!;
+    public ReviewerEntity Reviewer { get; set; } = null!;
 
-    public int AuthorId { get; set; }
+    public int ReviewerId { get; set; }
 
-    public UserEntity Receiver { get; set; } = null!;
+    public RevieweeEntity Reviewee { get; set; } = null!;
 
-    public int ReceiverId { get; set; }
+    public int RevieweeId { get; set; }
 }

@@ -1,6 +1,7 @@
 using System.Text;
 using buki_api.db;
 using buki_api.modules.auth;
+using buki_api.modules.hash;
 using buki_api.modules.middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -44,9 +45,10 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<UserContext>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
-builder.Services.AddSingleton<IAuthService, AuthService>();
+builder.Services.AddSingleton<IHashPassword, HashService>();
 
 var app = builder.Build();
 
@@ -54,9 +56,9 @@ app.UseHandleErrors();
 
 app.UseHttpsRedirection();
 
-// app.UseAuthentication();
+app.UseAuthentication();
 
-// app.UseAuthorization();
+app.UseAuthorization();
 
 app.UseMiddleware<ExtractTokenMiddleware>();
 

@@ -7,6 +7,8 @@ public class UserContext
 {
     public string Email { get; set; } = null!;
     public UserRole Role { get; set; }
+
+    public string Token { get; set; } = null!;
 }
 
 
@@ -31,6 +33,7 @@ public class ExtractTokenMiddleware
             var role = jwt.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
             userContext.Email = name;
             userContext.Role = Enum.Parse<UserRole>(role);
+            userContext.Token = token;
         }
 
         await next(context);

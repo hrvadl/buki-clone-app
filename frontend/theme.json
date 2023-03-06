@@ -1,0 +1,16 @@
+{
+  "text-basic-color": "#E5E5E5",
+  "text-alternate-color": "#fff",
+  "background-basic-color-1": "#fff",
+  "background-basic-color-2": "#ccc",
+  "background-basic-color-3": "#E5E5E5",
+  "Button": {
+    "appearances": {
+      "filled": {
+        "mapping": {
+          "backgroundColor": "#1E0094"
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "D9xzSH13P0Mig2IQb3KAhwOd2yhAUE2VbrDKFk+sFZCcXyL/+881bcKYoW9zbayASx904mlBWEy3a7pGO2v3qw==",
+  "dgSpecHash": "dNmEhhUrst93bmPQ6Wq8n68paFotqWWpukevjRLL7VFNXMjLJioTPiF4sRiZzvznjmF10Uh0pJ/WeiyFycCzVg==",
   "success": true,
   "projectFilePath": "/workspaces/buki-app/backend/buki-api.csproj",
   "expectedPackageFiles": [
+    "/root/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/root/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/root/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/root/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -14,29 +14,28 @@ public class AuthController : ControllerBase
         this.authService = authService;
     }
 
+    [AllowAnonymous]
     [HttpPost("sign-up")]
-    public async Task<ActionResult<string>> SignUp()
+    public async Task<ActionResult<string>> SignUp([FromBody] SignUpUserDTO user)
     {
-        return this.authService.test();
+        var result = await this.authService.SignUp(user);
+
+        return result ? Ok("Success") : BadRequest("Something went wrong...");
     }
 
+    [AllowAnonymous]
     [HttpPost("log-in")]
-    public async Task<IActionResult> LogIn([FromBody] UserDTO user)
+    public async Task<IActionResult> LogIn([FromBody] AuthUserDTO user)
     {
-        var token = this.tokenService.BuildToken(user);
-        return Ok(token);
+        var result = await this.authService.LogIn(user);
+        return Ok(result);
     }
 
     [Authorize]
     [HttpGet]
-    public async Task<ActionResult<string>> CheckToken()
+    public async Task<IActionResult> CheckToken([FromServices] UserContext userContext)
     {
-        return this.authService.test();
-    }
-
-    [HttpGet("test")]
-    public async Task<ActionResult<string>> Test()
-    {
-        return this.authService.test();
+        var result = await this.authService.CheckToken(userContext);
+        return Ok(result);
     }
 }
