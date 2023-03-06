@@ -2,9 +2,9 @@ import Home from "@/screens/Home";
 import LogIn from "@/screens/LogIn";
 import PreSignUp from "@/screens/PreSignUp";
 import SignUp from "@/screens/SignUp";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import useVerifyToken from "../hooks/useVerifyToken";
 import Stack from "../root-stack";
 
@@ -18,7 +18,7 @@ const NavigationRoutes = () => {
   if (isLoading) return <ActivityIndicator size="large" />;
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={headerOptions}>
         {isLogined ? (
           <Stack.Screen name="Home" component={Home} />

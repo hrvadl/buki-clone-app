@@ -38,4 +38,4 @@ public class AuthController : ControllerBase
         var result = await this.authService.CheckToken(userContext);
         return Ok(result);
     }
-}
+}   
