@@ -1,5 +1,5 @@
 import Container from "@/design/container/Container";
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
+import { SafeAreaView } from "@/modules/platform";
 import RoleForm from "@/modules/pre-sign-up/components/RoleForm";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet } from "react-native";
@@ -9,7 +9,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "PreSignUp">;
 
 const PreSignUp = ({ navigation }: Props) => {
   return (
-    <SafeAreaViewCrossPlatform>
+    <SafeAreaView>
       <Container>
         <Text variant="headlineMedium" style={styles.FormHeader}>
           Who are you?
@@ -23,7 +23,7 @@ const PreSignUp = ({ navigation }: Props) => {
           Already have an account?
         </Text>
       </Container>
-    </SafeAreaViewCrossPlatform>
+    </SafeAreaView>
   );
 };
 

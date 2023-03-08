@@ -1,7 +1,7 @@
 import Container from "@/design/container/Container";
 import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
-import SignUpForm from "@/modules/sign-up/components/SignUpForm";
+import { SafeAreaView } from "@/modules/platform";
+import { SignUpForm } from "@/modules/sign-up";
 import { NativeStackScreenProps } from "@react-navigation/native-stack/lib/typescript/src/types";
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -19,7 +19,7 @@ const SignUp = ({ navigation, route }: Props) => {
   };
 
   return (
-    <SafeAreaViewCrossPlatform>
+    <SafeAreaView>
       <GoBackTopBar onPressGoBack={onPressGoBack} title="Sign Up" />
       <Container>
         <SignUpForm role={role} />
@@ -31,7 +31,7 @@ const SignUp = ({ navigation, route }: Props) => {
           Already have an account?
         </Text>
       </Container>
-    </SafeAreaViewCrossPlatform>
+    </SafeAreaView>
   );
 };
 

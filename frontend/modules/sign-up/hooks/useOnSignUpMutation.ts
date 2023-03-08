@@ -1,7 +1,7 @@
 import ErrorApiResponse from "@/models/api-response";
 import { roleMap, UserRole } from "@/models/user";
 import { useMutation } from "react-query";
-import signUpApi, { SignUpProps } from "../api";
+import { signUp, SignUpProps } from "../api";
 import defaultValues from "../mocks/form-default";
 
 export default function useOnSignUpMutation(role: UserRole) {
@@ -9,7 +9,7 @@ export default function useOnSignUpMutation(role: UserRole) {
     unknown,
     ErrorApiResponse,
     SignUpProps
-  >(signUpApi.signUp);
+  >(signUp);
   const onSignUp = (values: typeof defaultValues) =>
     mutate({ ...values, role: roleMap[role] });
 

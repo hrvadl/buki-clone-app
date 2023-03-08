@@ -1,7 +1,9 @@
-import Home from "@/screens/Home";
-import LogIn from "@/screens/LogIn";
-import PreSignUp from "@/screens/PreSignUp";
-import SignUp from "@/screens/SignUp";
+import {
+  HomeScreen,
+  LoginScreen,
+  PreSignUpScreen,
+  SignUpScreen,
+} from "@/screens";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { ActivityIndicator } from "react-native-paper";
@@ -21,12 +23,12 @@ const NavigationRoutes = () => {
     <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={headerOptions}>
         {isLogined ? (
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={HomeScreen} />
         ) : (
           <>
-            <Stack.Screen name="PreSignUp" component={PreSignUp} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="LogIn" component={LogIn} />
+            <Stack.Screen name="PreSignUp" component={PreSignUpScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="LogIn" component={LoginScreen} />
           </>
         )}
       </Stack.Navigator>

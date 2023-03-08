@@ -1,33 +1,22 @@
-import Environment from "@/Config";
-import apiRequest from "@/lib/fetch";
 import storage from "@/lib/local-storage";
-import { isUser } from "@/models/user/utils/is-user";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { useQuery } from "react-query";
+import { checkToken } from "../api/check-token";
 import { UserContext } from "../context/user-context";
 
 export default function useVerifyToken() {
   const { setUser, user } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, isLoading, error } = useQuery("check-token", checkToken, {
+    retry: false,
+  });
 
   useEffect(() => {
-    const getToken = async () => {
-      const token = await storage.read("token");
-      if (!token) return setIsLoading(false);
+    if (data) setUser(data);
+  }, [data]);
 
-      try {
-        const url = new URL(Environment.REACT_APP_API_URL + "/api/auth/");
-        const user = await apiRequest.get(url);
+  useEffect(() => {
+    if (error) storage.remove("token");
+  }, [error]);
 
-        if (!isUser(user)) return setIsLoading(false);
-
-        setUser(user);
-      } catch (e) {
-        return setIsLoading(false);
-      }
-    };
-
-    getToken();
-  }, []);
-
-  return { isLoading, isLogined: !!user };
+  return { isLoading, isLogined: Boolean(user) };
 }

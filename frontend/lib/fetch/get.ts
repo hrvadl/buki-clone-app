@@ -6,6 +6,9 @@ export default async function get(
   opt: RequestInit = {}
 ): Promise<unknown> {
   const token = await storage.read("token");
+
+  console.log(token);
+
   return baseFetch(url, {
     ...opt,
     method: "GET",

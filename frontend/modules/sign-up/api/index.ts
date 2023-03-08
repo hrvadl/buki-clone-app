@@ -10,12 +10,8 @@ const SIGN_UP_URLS = {
   SignUp: `${Environment.REACT_APP_API_URL}/api/auth/sign-up/`,
 };
 
-const signUpApi = {
-  async signUp(props: SignUpProps) {
-    return apiRequest.post(SIGN_UP_URLS.SignUp, {
-      body: JSON.stringify(props),
-    });
-  },
-};
-
-export default signUpApi;
+export async function signUp(props: SignUpProps) {
+  return apiRequest.post(SIGN_UP_URLS.SignUp, {
+    body: JSON.stringify(props),
+  });
+}

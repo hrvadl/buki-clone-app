@@ -1,16 +1,16 @@
 import Container from "@/design/container/Container";
-import LoginForm from "@/modules/login/components/LoginForm";
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
+import { LoginForm } from "@/modules/login";
+import { SafeAreaView } from "@/modules/platform";
 import { NativeStackScreenProps } from "@react-navigation/native-stack/lib/typescript/src/types";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+type Props = NativeStackScreenProps<RootStackParamList, "LogIn">;
 
 const LogIn = ({ navigation }: Props) => {
   return (
-    <SafeAreaViewCrossPlatform>
+    <SafeAreaView>
       <Container>
         <LoginForm />
         <Text
@@ -21,7 +21,7 @@ const LogIn = ({ navigation }: Props) => {
           Don't have an account yet?
         </Text>
       </Container>
-    </SafeAreaViewCrossPlatform>
+    </SafeAreaView>
   );
 };
 
