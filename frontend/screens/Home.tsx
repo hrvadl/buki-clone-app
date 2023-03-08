@@ -1,14 +1,15 @@
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
+import Container from "@/design/container/Container";
+import { SafeAreaView } from "@/modules/platform";
 import React from "react";
 import { Text } from "react-native";
 
-type Props = {};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
-    <SafeAreaViewCrossPlatform>
-      <Text>Home</Text>
-    </SafeAreaViewCrossPlatform>
+    <SafeAreaView>
+      <Container>
+        <Text>Home</Text>
+      </Container>
+    </SafeAreaView>
   );
 };
 

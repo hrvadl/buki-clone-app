@@ -1,15 +1,38 @@
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
+import Container from "@/design/container/Container";
+import { LoginForm } from "@/modules/login";
+import { SafeAreaView } from "@/modules/platform";
+import { NativeStackScreenProps } from "@react-navigation/native-stack/lib/typescript/src/types";
 import React from "react";
-import { Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { Appbar, Text } from "react-native-paper";
 
-type Props = {};
+type Props = NativeStackScreenProps<RootStackParamList, "LogIn">;
 
-const LogIn = (props: Props) => {
+const LogIn = ({ navigation }: Props) => {
   return (
-    <SafeAreaViewCrossPlatform>
-      <Text>LogIn</Text>
-    </SafeAreaViewCrossPlatform>
+    <SafeAreaView>
+      <Container>
+        <Appbar.Header>
+          <Appbar.Content title="Log In" />
+        </Appbar.Header>
+        <LoginForm />
+        <Text
+          variant="bodyLarge"
+          style={styles.GoSignUpHint}
+          onPress={() => navigation.navigate("PreSignUp")}
+        >
+          Don't have an account yet?
+        </Text>
+      </Container>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  GoSignUpHint: {
+    textAlign: "center",
+    marginTop: 20,
+  },
+});
 
 export default LogIn;

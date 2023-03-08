@@ -29,8 +29,8 @@ public class ExtractTokenMiddleware
         {
             var handler = new JwtSecurityTokenHandler();
             var jwt = handler.ReadJwtToken(token);
-            var name = jwt.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
-            var role = jwt.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+            var name = jwt.Claims.First(claim => claim.Type == "email").Value;
+            var role = jwt.Claims.First(claim => claim.Type == "role").Value;
             userContext.Email = name;
             userContext.Role = Enum.Parse<UserRole>(role);
             userContext.Token = token;

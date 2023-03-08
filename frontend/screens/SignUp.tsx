@@ -1,41 +1,45 @@
-import SafeAreaViewCrossPlatform from "@/modules/platform/SafeAreaView";
-import useSignUp from "@/modules/sign-up/hooks/useSignUp";
+import Container from "@/design/container/Container";
+import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
+import { SafeAreaView } from "@/modules/platform";
+import { SignUpForm } from "@/modules/sign-up";
 import { NativeStackScreenProps } from "@react-navigation/native-stack/lib/typescript/src/types";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
-const PreSignUp = ({ navigation, route }: Props) => {
+const SignUp = ({ navigation, route }: Props) => {
   const {
     params: { role },
   } = route;
 
-  const {
-    changeEmailHandler,
-    changeNameHandler,
-    changePasswordHandler,
-    signUpHandler,
-    email,
-    name,
-    password,
-  } = useSignUp();
+  const onPressGoBack = () => {
+    navigation.goBack();
+  };
 
   return (
-    <SafeAreaViewCrossPlatform>
-      <Text>{role}</Text>
-    </SafeAreaViewCrossPlatform>
+    <SafeAreaView>
+      <GoBackTopBar onPressGoBack={onPressGoBack} title="Sign Up" />
+      <Container>
+        <SignUpForm role={role} />
+        <Text
+          variant="bodyLarge"
+          style={styles.GoSignUpHint}
+          onPress={() => navigation.navigate("LogIn")}
+        >
+          Already have an account?
+        </Text>
+      </Container>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  Form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  Input: {
-    marginTop: 40,
+  GoSignUpHint: {
+    textAlign: "center",
+    marginTop: 20,
   },
 });
 
-export default PreSignUp;
+export default SignUp;
