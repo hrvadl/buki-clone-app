@@ -3,6 +3,7 @@ import { RegisterOptions } from "react-hook-form";
 
 export type FormField<T extends { [x: string]: any }> = {
   name: keyof T;
+  placeholder: string;
   rules:
     | Omit<
         RegisterOptions<T, Path<T>>,

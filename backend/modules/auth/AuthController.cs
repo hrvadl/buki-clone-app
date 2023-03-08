@@ -1,3 +1,4 @@
+using buki_api.modules.auth.utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace buki_api.modules.auth;
@@ -16,11 +17,11 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("sign-up")]
-    public async Task<ActionResult<string>> SignUp([FromBody] SignUpUserDTO user)
+    public async Task<ActionResult<SignUpResponse>> SignUp([FromBody] SignUpUserDTO user)
     {
         var result = await this.authService.SignUp(user);
 
-        return result ? Ok("Success") : BadRequest("Something went wrong...");
+        return result ? Ok(new SignUpRes(true)) : BadRequest(new SignUpRes(false));
     }
 
     [AllowAnonymous]
@@ -38,4 +39,4 @@ public class AuthController : ControllerBase
         var result = await this.authService.CheckToken(userContext);
         return Ok(result);
     }
-}   
+}

@@ -29,3 +29,8 @@ public class LogInResponse : AuthUserDTO
 {
     public string Token { get; set; } = null!;
 }
+
+public interface SignUpResponse
+{
+    public bool Success { get; set; }
+}

@@ -31,11 +31,13 @@ function Form<T extends { [x: string]: any }>({
     <View style={style}>
       {fields.map((field) => (
         <Controller
+          key={field.placeholder}
           control={control}
           name={field.name as Path<T>}
           rules={field.rules}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
+              placeholder={field.placeholder}
               style={styles.TextInput}
               mode="outlined"
               onChangeText={onChange}

@@ -8,3 +8,8 @@ export type User = {
   name: string | null;
   number: string | null;
 };
+
+export const roleMap = {
+  Teacher: 0,
+  Student: 1,
+} as const;

@@ -2,7 +2,7 @@ import storage from "@/lib/local-storage";
 import baseFetch from "./base";
 
 export default async function post(
-  url: URL,
+  url: URL | string,
   opt: RequestInit = {}
 ): Promise<unknown> {
   const token = await storage.read("token");
@@ -10,6 +10,7 @@ export default async function post(
     ...opt,
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       ...(opt.headers ?? {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
