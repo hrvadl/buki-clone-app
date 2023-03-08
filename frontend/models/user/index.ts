@@ -7,6 +7,7 @@ export type User = {
   password: string;
   name: string | null;
   number: string | null;
+  token: string;
 };
 
 export const roleMap = {

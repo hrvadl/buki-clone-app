@@ -1,13 +1,14 @@
+import Container from "@/design/container/Container";
 import { SafeAreaView } from "@/modules/platform";
 import React from "react";
 import { Text } from "react-native";
 
-type Props = {};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <SafeAreaView>
-      <Text>Home</Text>
+      <Container>
+        <Text>Home</Text>
+      </Container>
     </SafeAreaView>
   );
 };

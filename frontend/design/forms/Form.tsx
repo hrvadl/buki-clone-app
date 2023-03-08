@@ -1,5 +1,5 @@
 import React from "react";
-import { Controller, Path, useForm } from "react-hook-form";
+import { Controller, Path, Resolver, useForm } from "react-hook-form";
 import { StyleProp, StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { FormField } from "./types";
@@ -10,6 +10,7 @@ type Props<T extends { [x: string]: any }> = {
   defaultValues: any;
   buttonText: string;
   onSubmit: (values: T) => void;
+  resolver: Resolver<any>;
 };
 
 function Form<T extends { [x: string]: any }>({
@@ -18,13 +19,15 @@ function Form<T extends { [x: string]: any }>({
   defaultValues,
   buttonText,
   onSubmit,
+  resolver,
 }: Props<T>) {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { isValid, errors },
   } = useForm<T>({
     defaultValues,
+    resolver,
   });
 
   return (
@@ -35,19 +38,25 @@ function Form<T extends { [x: string]: any }>({
           control={control}
           name={field.name as Path<T>}
           rules={field.rules}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder={field.placeholder}
-              style={styles.TextInput}
-              mode="outlined"
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-            />
+          render={({
+            field: { onChange, onBlur, value },
+            fieldState: { error },
+          }) => (
+            <View style={styles.TextInput}>
+              <TextInput
+                placeholder={field.placeholder}
+                mode="outlined"
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+              />
+              {error && <Text style={styles.Error}>{error.message}</Text>}
+            </View>
           )}
         />
       ))}
       <Button
+        style={styles.Button}
         textColor="#fff"
         mode="contained"
         onPress={handleSubmit(onSubmit)}
@@ -60,7 +69,16 @@ function Form<T extends { [x: string]: any }>({
 
 const styles = StyleSheet.create({
   TextInput: {
+    position: "relative",
     marginBottom: 30,
+  },
+  Error: {
+    position: "absolute",
+    bottom: -25,
+    marginLeft: 5,
+  },
+  Button: {
+    marginTop: 10,
   },
 });
 

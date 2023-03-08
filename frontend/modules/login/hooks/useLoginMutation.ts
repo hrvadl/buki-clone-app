@@ -9,7 +9,7 @@ import defaultLogInValues from "../mocks/default-form-values";
 
 export default function useLoginMutation() {
   const { mutate, error, data } = useMutation<
-    User & { token: string },
+    User,
     ErrorApiResponse | Error,
     typeof defaultLogInValues
   >(logIn);
