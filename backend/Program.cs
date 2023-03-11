@@ -1,5 +1,6 @@
 using System.Text;
 using buki_api.db;
+using buki_api.modules.ad;
 using buki_api.modules.auth;
 using buki_api.modules.hash;
 using buki_api.modules.middlewares;
@@ -10,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-
+builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthentication(options =>
@@ -46,6 +47,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<UserContext>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAdService, AdService>();
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSingleton<IHashPassword, HashService>();

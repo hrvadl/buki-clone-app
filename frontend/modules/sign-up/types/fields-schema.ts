@@ -10,6 +10,7 @@ export const signUpSchema = z
     confirmPassword: z
       .string()
       .min(1, { message: "Confirm Password is required" }),
+    number: z.number().int().min(1, { message: "Number is required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],

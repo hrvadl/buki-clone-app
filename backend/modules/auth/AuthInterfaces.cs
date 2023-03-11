@@ -23,6 +23,10 @@ public class AuthUserDTO : UserDTO
 public class SignUpUserDTO : AuthUserDTO
 {
     public string Name { get; set; } = null!;
+
+    public string Description { get; set; } = null!;
+
+    public string Number { get; set; } = null!;
 }
 
 public class LogInResponse : AuthUserDTO

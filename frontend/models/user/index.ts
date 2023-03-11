@@ -5,8 +5,9 @@ export type User = {
   email: string;
   role: UserRole;
   password: string;
-  name: string | null;
-  number: string | null;
+  name: string;
+  number: string;
+  description: string;
   token: string;
 };
 
