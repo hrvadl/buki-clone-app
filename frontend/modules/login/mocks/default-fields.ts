@@ -11,6 +11,7 @@ export const defaultFields: FormField<typeof defaultLogInValues>[] = [
   },
   {
     name: "password",
+    password: true,
     placeholder: "Password",
     rules: {
       required: true,

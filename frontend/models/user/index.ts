@@ -9,6 +9,7 @@ export type User = {
   number: string;
   description: string;
   token: string;
+  favorites: User[];
 };
 
 export const roleMap = {

@@ -1,5 +1,4 @@
 import Form from "@/design/forms/Form";
-import isApiError from "@/models/api-response/utils/is-api-error";
 import { UserRole } from "@/models/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavigationProp, useNavigation } from "@react-navigation/core";
@@ -27,7 +26,7 @@ const SignUpForm = ({ style, role }: Props) => {
     navigation.navigate("LogIn");
   }
 
-  if (isApiError(error)) alert(error.message);
+  if (error) alert(error.message);
 
   return (
     <Form

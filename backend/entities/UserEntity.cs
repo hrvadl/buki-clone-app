@@ -27,4 +27,6 @@ public class UserEntity
     public List<ReviewEntity> GivenReviews { get; set; } = null!;
 
     public List<ReviewEntity> RecievedReviews { get; set; } = null!;
+
+    public List<UserEntity> Favorites { get; set; } = null!;
 }

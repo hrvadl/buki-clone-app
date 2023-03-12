@@ -36,6 +36,8 @@ public class AuthService : IAuthService
 
         var res = new LogInResponse
         {
+            Favorites = candidate.Favorites,
+            Name = candidate.Name,
             Email = candidate.Email,
             Password = candidate.Password,
             Role = candidate.Role,
@@ -75,7 +77,9 @@ public class AuthService : IAuthService
 
         var response = new LogInResponse
         {
+            Favorites = user.Favorites,
             Email = user.Email,
+            Name = user.Name,
             Password = user.Password,
             Role = user.Role,
             Token = userContext.Token

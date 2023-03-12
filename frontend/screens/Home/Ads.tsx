@@ -1,13 +1,22 @@
-import React from "react";
-import { Text, View } from "react-native";
+import Container from "@/design/container/Container";
+import {
+  AdHeader,
+  Categories,
+  ChosenCategoryContextProvider,
+} from "@/modules/ad";
+import { UserContext } from "@/modules/navigation/context/user-context";
+import React, { useContext } from "react";
 
-type Props = {};
+const Ads = () => {
+  const { user } = useContext(UserContext);
 
-const Ads = (props: Props) => {
   return (
-    <View>
-      <Text>Ads</Text>
-    </View>
+    <Container>
+      <ChosenCategoryContextProvider>
+        <AdHeader name={user?.name ?? ""} />
+        <Categories />
+      </ChosenCategoryContextProvider>
+    </Container>
   );
 };
 

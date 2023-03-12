@@ -1,27 +1,23 @@
-import Container from "@/design/container/Container";
-import { HomeTabs } from "@/modules/navigation/types/home-tabs";
+import { Tabs } from "@/modules/home";
 import { SafeAreaView } from "@/modules/platform";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import Ads from "./Ads";
-import Profile from "./Profile";
 
-const Tab = createBottomTabNavigator<HomeTabs>();
+import { StyleSheet, View } from "react-native";
 
 const Home = () => {
   return (
     <SafeAreaView>
-      <Container>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Ads" component={Ads} />
-          </Tab.Navigator>
-          <Tab.Screen name="Profile" component={Profile} />
-        </NavigationContainer>
-      </Container>
+      <View style={styles.Container}>
+        <Tabs />
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  Container: {
+    height: "100%",
+  },
+});
 
 export default Home;

@@ -2,6 +2,7 @@ import {
   HomeScreen,
   LoginScreen,
   PreSignUpScreen,
+  SearchScreen,
   SignUpScreen,
 } from "@/screens";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
@@ -29,7 +30,10 @@ const NavigationRoutes = () => {
     <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={headerOptions}>
         {isLogined ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Search" component={SearchScreen} />
+          </>
         ) : (
           <>
             <Stack.Screen name="LogIn" component={LoginScreen} />
