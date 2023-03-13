@@ -14,7 +14,7 @@ const Ads = () => {
     <Container>
       <ChosenCategoryContextProvider>
         <AdHeader name={user?.name ?? ""} />
-        <Categories />
+        <Categories style={{ marginTop: 10 }} />
       </ChosenCategoryContextProvider>
     </Container>
   );

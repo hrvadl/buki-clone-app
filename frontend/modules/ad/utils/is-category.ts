@@ -1,6 +1,6 @@
-import { Category } from "@/models/category";
+import { ResponseCategory } from "@/models/category";
 
-const isCategory = (data: unknown): data is Category[] =>
+const isCategory = (data: unknown): data is ResponseCategory[] =>
   !!(
     data &&
     typeof data === "object" &&

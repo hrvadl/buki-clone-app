@@ -1,35 +1,35 @@
 import { Category, Subject } from "@/models/category";
+import { useMemo } from "react";
 import { ImageSourcePropType } from "react-native";
 import { useQuery } from "react-query";
 import { getAndCountCategories } from "../api/count-categories";
+import { initialData, subjectMapping } from "../mocks/categories";
 
-const initialData = {
-  [Subject.Chemistry]: 0,
-  [Subject.IT]: 0,
-  [Subject.Math]: 0,
-  [Subject.Physics]: 0,
-};
+type CategoryAndIcon = Category & { icon: ImageSourcePropType };
 
 export default function useCountCategoriesQuery() {
   const { data, error } = useQuery("count-categories", getAndCountCategories);
 
-  if (!data || error) return { data: (data ?? []) as [], error };
-
-  data.forEach((item) => {
-    initialData[item.name] = item.adQuantity;
+  data?.forEach((item) => {
+    initialData[subjectMapping[item.name]] = item.adQuantity;
   });
 
-  const normalizedData = (
-    Object.keys(initialData) as (keyof typeof Subject)[]
-  ).reduce((acc, key) => {
-    acc.push({
-      name: key,
-      adQuantity: initialData[key],
-      icon: require("@/assets/science.png"),
-    });
+  const normalizedData = useMemo(() => {
+    return !data
+      ? ([] as CategoryAndIcon[])
+      : (Object.keys(initialData) as (keyof typeof Subject)[]).reduce(
+          (acc, key) => {
+            acc.push({
+              name: key,
+              adQuantity: initialData[key],
+              icon: require("@/assets/science.png"),
+            });
 
-    return acc;
-  }, [] as (Category & { icon: ImageSourcePropType })[]);
+            return acc;
+          },
+          [] as CategoryAndIcon[]
+        );
+  }, [data?.length ?? 0]);
 
   return { data: normalizedData, error };
 }

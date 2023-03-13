@@ -1,16 +1,13 @@
 import { Tabs } from "@/modules/home";
-import { SafeAreaView } from "@/modules/platform";
 import React from "react";
 
 import { StyleSheet, View } from "react-native";
 
 const Home = () => {
   return (
-    <SafeAreaView>
-      <View style={styles.Container}>
-        <Tabs />
-      </View>
-    </SafeAreaView>
+    <View style={styles.Container}>
+      <Tabs />
+    </View>
   );
 };
 
