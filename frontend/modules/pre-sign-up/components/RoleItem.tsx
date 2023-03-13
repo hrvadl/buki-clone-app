@@ -4,8 +4,8 @@ import {
   ImageSourcePropType,
   Pressable,
   StyleSheet,
-  Text,
 } from "react-native";
+import { Text } from "react-native-paper";
 
 type Props = {
   role: "Student" | "Teacher";
@@ -17,7 +17,9 @@ const RoleItem = ({ role, source, onPress }: Props) => {
   return (
     <Pressable onPress={onPress}>
       <Image style={styles.Image} resizeMode="contain" source={source} />
-      <Text style={styles.Hint}>{role}</Text>
+      <Text variant="labelLarge" style={styles.Hint}>
+        {role}
+      </Text>
     </Pressable>
   );
 };

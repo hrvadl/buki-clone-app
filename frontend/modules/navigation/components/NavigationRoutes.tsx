@@ -1,10 +1,14 @@
-import Home from "@/screens/Home";
-import LogIn from "@/screens/LogIn";
-import PreSignUp from "@/screens/PreSignUp";
-import SignUp from "@/screens/SignUp";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  HomeScreen,
+  LoginScreen,
+  PreSignUpScreen,
+  SearchScreen,
+  SignUpScreen,
+} from "@/screens";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import useVerifyToken from "../hooks/useVerifyToken";
 import Stack from "../root-stack";
 
@@ -15,23 +19,40 @@ const headerOptions = {
 const NavigationRoutes = () => {
   const { isLoading, isLogined } = useVerifyToken();
 
-  if (isLoading) return <ActivityIndicator size="large" />;
+  if (isLoading)
+    return (
+      <View style={styles.LoaderWrapper}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={headerOptions}>
         {isLogined ? (
-          <Stack.Screen name="Home" component={Home} />
+          <>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Search" component={SearchScreen} />
+          </>
         ) : (
           <>
-            <Stack.Screen name="PreSignUp" component={PreSignUp} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="LogIn" component={LogIn} />
+            <Stack.Screen name="LogIn" component={LoginScreen} />
+            <Stack.Screen name="PreSignUp" component={PreSignUpScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
           </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  LoaderWrapper: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default NavigationRoutes;

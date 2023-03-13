@@ -23,6 +23,7 @@ public class AuthService : IAuthService
 
     async public Task<LogInResponse> LogIn(AuthUserDTO user)
     {
+        //Include
         var candidate = await this.userRepository.FirstOrDefaultAsync(u => u.Email == user.Email);
 
         if (candidate is null) throw new ValidationException("Incorrect email");
@@ -35,6 +36,8 @@ public class AuthService : IAuthService
 
         var res = new LogInResponse
         {
+            Favorites = candidate.Favorites,
+            Name = candidate.Name,
             Email = candidate.Email,
             Password = candidate.Password,
             Role = candidate.Role,
@@ -46,17 +49,18 @@ public class AuthService : IAuthService
 
     async public Task<bool> SignUp(SignUpUserDTO user)
     {
-        if (user.Email is null || user.Password is null) throw new ValidationException("There's not enough data");
+        if (user.Email is null || user.Password is null || user.Number is null || user.Name is null) throw new ValidationException("There's not enough data");
 
-        var isAlreadyUsed = await this.userRepository.FirstOrDefaultAsync(u => u.Email == user.Email);
+        var isAlreadyUsed = await this.userRepository.FirstOrDefaultAsync(u => u.Email == user.Email || u.Number == u.Number);
 
-        if (isAlreadyUsed is not null) throw new ValidationException("This email is Already used");
+        if (isAlreadyUsed is not null) throw new ValidationException("This user already exists");
 
         var newUser = new UserEntity
         {
             Email = user.Email,
             Password = this.hashService.Hash(user.Password),
-            Name = user.Name
+            Name = user.Name,
+            Number = user.Number
         };
 
         this.userRepository.Add(newUser);
@@ -73,7 +77,9 @@ public class AuthService : IAuthService
 
         var response = new LogInResponse
         {
+            Favorites = user.Favorites,
             Email = user.Email,
+            Name = user.Name,
             Password = user.Password,
             Role = user.Role,
             Token = userContext.Token

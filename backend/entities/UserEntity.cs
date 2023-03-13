@@ -14,7 +14,9 @@ public class UserEntity
 
     public string Email { get; set; } = null!;
 
-    public string? Number { get; set; } = null!;
+    public string Number { get; set; } = null!;
+
+    public string? Description { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 
@@ -22,5 +24,9 @@ public class UserEntity
 
     public List<AdEntity> Ads { get; set; } = null!;
 
-    public List<ReviewEntity> Reviews { get; set; } = null!;
+    public List<ReviewEntity> GivenReviews { get; set; } = null!;
+
+    public List<ReviewEntity> RecievedReviews { get; set; } = null!;
+
+    public List<UserEntity> Favorites { get; set; } = null!;
 }

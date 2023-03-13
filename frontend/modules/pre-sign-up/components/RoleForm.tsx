@@ -4,15 +4,14 @@ import { View } from "react-native";
 import { roles } from "../mocks/roles";
 import RoleItem from "./RoleItem";
 
-type Props = {};
-
-const RoleForm = (props: Props) => {
+const RoleForm = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <View>
       {roles.map((role) => (
         <RoleItem
+          key={role.role}
           {...role}
           onPress={() =>
             navigation.navigate("SignUp", {
