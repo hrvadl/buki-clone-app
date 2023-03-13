@@ -17,8 +17,16 @@ const signUpFields: FormField<typeof defaultValues>[] = [
     },
   },
   {
+    name: "number",
+    placeholder: "Telephone number +380...",
+    rules: {
+      required: true,
+    },
+  },
+  {
     name: "password",
     placeholder: "Password",
+    password: true,
     rules: {
       required: true,
     },
@@ -26,6 +34,7 @@ const signUpFields: FormField<typeof defaultValues>[] = [
   {
     name: "confirmPassword",
     placeholder: "Confirm Password",
+    password: true,
     rules: {
       required: true,
     },

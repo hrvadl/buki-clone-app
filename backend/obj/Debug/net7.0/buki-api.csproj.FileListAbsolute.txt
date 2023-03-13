@@ -8,6 +8,8 @@
 /workspaces/buki-app/backend/bin/Debug/net7.0/BCrypt.Net-Next.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Humanizer.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
@@ -21,6 +23,7 @@
 /workspaces/buki-app/backend/bin/Debug/net7.0/Mono.TextTemplating.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/MySqlConnector.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Newtonsoft.Json.dll
+/workspaces/buki-app/backend/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/Pomelo.EntityFrameworkCore.MySql.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/System.CodeDom.dll
 /workspaces/buki-app/backend/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll

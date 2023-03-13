@@ -28,6 +28,10 @@ namespace buki_api.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Subject")
                         .HasColumnType("int");
 
@@ -54,42 +58,13 @@ namespace buki_api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserEntityId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RevieweeId")
-                        .IsUnique();
+                    b.HasIndex("RevieweeId");
 
-                    b.HasIndex("ReviewerId")
-                        .IsUnique();
-
-                    b.HasIndex("UserEntityId");
+                    b.HasIndex("ReviewerId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("buki_api.entities.RevieweeEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RevieweeEntity");
-                });
-
-            modelBuilder.Entity("buki_api.entities.ReviewerEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ReviewerEntity");
                 });
 
             modelBuilder.Entity("buki_api.entities.UserEntity", b =>
@@ -97,6 +72,9 @@ namespace buki_api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -107,6 +85,7 @@ namespace buki_api.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Number")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Password")
@@ -116,7 +95,12 @@ namespace buki_api.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserEntityId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserEntityId");
 
                     b.ToTable("Users");
                 });
@@ -134,44 +118,39 @@ namespace buki_api.Migrations
 
             modelBuilder.Entity("buki_api.entities.ReviewEntity", b =>
                 {
-                    b.HasOne("buki_api.entities.RevieweeEntity", "Reviewee")
-                        .WithOne("Review")
-                        .HasForeignKey("buki_api.entities.ReviewEntity", "RevieweeId")
+                    b.HasOne("buki_api.entities.UserEntity", "Reviewee")
+                        .WithMany("RecievedReviews")
+                        .HasForeignKey("RevieweeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("buki_api.entities.ReviewerEntity", "Reviewer")
-                        .WithOne("Review")
-                        .HasForeignKey("buki_api.entities.ReviewEntity", "ReviewerId")
+                    b.HasOne("buki_api.entities.UserEntity", "Reviewer")
+                        .WithMany("GivenReviews")
+                        .HasForeignKey("ReviewerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("buki_api.entities.UserEntity", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("UserEntityId");
 
                     b.Navigation("Reviewee");
 
                     b.Navigation("Reviewer");
                 });
 
-            modelBuilder.Entity("buki_api.entities.RevieweeEntity", b =>
+            modelBuilder.Entity("buki_api.entities.UserEntity", b =>
                 {
-                    b.Navigation("Review")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("buki_api.entities.ReviewerEntity", b =>
-                {
-                    b.Navigation("Review")
-                        .IsRequired();
+                    b.HasOne("buki_api.entities.UserEntity", null)
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserEntityId");
                 });
 
             modelBuilder.Entity("buki_api.entities.UserEntity", b =>
                 {
                     b.Navigation("Ads");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("Favorites");
+
+                    b.Navigation("GivenReviews");
+
+                    b.Navigation("RecievedReviews");
                 });
 #pragma warning restore 612, 618
         }

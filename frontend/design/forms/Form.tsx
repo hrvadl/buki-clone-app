@@ -44,6 +44,7 @@ function Form<T extends { [x: string]: any }>({
           }) => (
             <View style={styles.TextInput}>
               <TextInput
+                secureTextEntry={!!field.password}
                 placeholder={field.placeholder}
                 mode="outlined"
                 onChangeText={onChange}

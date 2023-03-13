@@ -2,6 +2,7 @@ const defaultValues = {
   name: "",
   email: "",
   password: "",
+  number: "",
   confirmPassword: "",
 };
 

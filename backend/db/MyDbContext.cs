@@ -15,5 +15,11 @@ public class MyDbContext : DbContext
 
     public DbSet<AdEntity> Ads { get; set; } = null!;
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<ReviewEntity>().HasOne(e => e.Reviewee).WithMany(e => e.RecievedReviews).HasForeignKey(e => e.RevieweeId);
 
+        modelBuilder.Entity<ReviewEntity>().HasOne(e => e.Reviewer).WithMany(e => e.GivenReviews).HasForeignKey(e => e.ReviewerId);
+    }
 }

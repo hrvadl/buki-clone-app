@@ -23,11 +23,14 @@ public class AuthUserDTO : UserDTO
 public class SignUpUserDTO : AuthUserDTO
 {
     public string Name { get; set; } = null!;
+    public string Number { get; set; } = null!;
 }
 
 public class LogInResponse : AuthUserDTO
 {
+    public string Name { get; set; } = null!;
     public string Token { get; set; } = null!;
+    public List<UserEntity> Favorites { get; set; } = null!;
 }
 
 public interface SignUpResponse
