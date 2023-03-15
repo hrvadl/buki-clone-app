@@ -1,10 +1,11 @@
 import Container from "@/design/container/Container";
+import { Text } from "@/design/Text";
 import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { ProfileItem, useProfile } from "@/modules/profile";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 const Profile = () => {
   const { logOut, user } = useProfile();

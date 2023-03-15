@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import { Text } from "react-native-paper";
+import { Text } from "../Text";
 import generateColor from "./utils/generate-color";
 
 type Props = {

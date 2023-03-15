@@ -1,3 +1,4 @@
+import { Text } from "@/design/Text";
 import React from "react";
 import {
   Image,
@@ -5,7 +6,6 @@ import {
   Pressable,
   StyleSheet,
 } from "react-native";
-import { Text } from "react-native-paper";
 
 type Props = {
   role: "Student" | "Teacher";

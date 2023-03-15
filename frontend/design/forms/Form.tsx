@@ -1,7 +1,8 @@
 import React from "react";
 import { Controller, Path, Resolver, useForm } from "react-hook-form";
 import { StyleProp, StyleSheet, View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
+import { Text } from "../Text";
 import { FormField } from "./types";
 
 type Props<T extends { [x: string]: any }> = {

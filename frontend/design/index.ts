@@ -111,6 +111,34 @@ const fontConfig = {
     lineHeight: 16,
     fontSize: 12,
   },
+  boldLarger: {
+    fontFamily: "Montserrat-Bold",
+    letterSpacing: 0.5,
+    fontWeight: "400" as const,
+    lineHeight: 22,
+    fontSize: 18,
+  },
+  boldLarge: {
+    fontFamily: "Montserrat-Bold",
+    letterSpacing: 0.5,
+    fontWeight: "400" as const,
+    lineHeight: 22,
+    fontSize: 16,
+  },
+  boldMedium: {
+    fontFamily: "Montserrat-Bold",
+    letterSpacing: 0.5,
+    fontWeight: "400" as const,
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  boldSmall: {
+    fontFamily: "Montserrat-Bold",
+    letterSpacing: 0.4,
+    fontWeight: "400" as const,
+    lineHeight: 16,
+    fontSize: 12,
+  },
   default: {
     fontFamily: "Montserrat-Regular",
     letterSpacing: 0.5,
@@ -119,6 +147,8 @@ const fontConfig = {
     fontSize: 14,
   },
 };
+
+export type TextVariants = keyof typeof fontConfig;
 
 const theme: ThemeProp = {
   ...MD3LightTheme,

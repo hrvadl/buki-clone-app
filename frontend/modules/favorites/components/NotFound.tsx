@@ -1,8 +1,9 @@
+import { Text } from "@/design/Text";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 const NotFound = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -10,7 +11,7 @@ const NotFound = () => {
   return (
     <View style={styles.Container}>
       <Image style={styles.Image} source={require("@/assets/not-found.png")} />
-      <Text style={styles.Heading} variant="titleLarge">
+      <Text style={styles.Heading} variant="boldLarger">
         No teachers
       </Text>
       <Text style={styles.Text}>
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   },
   Text: {
     marginBottom: 15,
+    textAlign: "center",
   },
   Image: {
     marginTop: 30,

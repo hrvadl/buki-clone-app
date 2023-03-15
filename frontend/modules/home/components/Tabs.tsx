@@ -1,3 +1,4 @@
+import { Text } from "@/design/Text";
 import { HomeTabs } from "@/modules/navigation/types/home-tabs";
 import Ads from "@/screens/Home/Ads";
 import Favorites from "@/screens/Home/Favorites";
@@ -8,7 +9,7 @@ import {
 } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 
 const Tab = createBottomTabNavigator<HomeTabs>();
 const tabsOptions: BottomTabNavigationOptions = {

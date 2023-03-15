@@ -1,3 +1,4 @@
+import { Text } from "@/design/Text";
 import { Subject } from "@/models/category";
 import { useTheme } from "@react-navigation/native";
 import React, { memo } from "react";
@@ -9,7 +10,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { Text } from "react-native-paper";
 
 type Props = {
   name: keyof typeof Subject;
