@@ -62,7 +62,7 @@ function Form<T extends { [x: string]: any }>({
         mode="contained"
         onPress={handleSubmit(onSubmit)}
       >
-        <Text>{buttonText}</Text>
+        <Text style={{ color: "#fff" }}>{buttonText}</Text>
       </Button>
     </View>
   );

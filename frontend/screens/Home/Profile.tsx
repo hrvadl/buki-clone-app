@@ -6,21 +6,22 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Button, Text } from "react-native-paper";
 
-type Props = {};
-
-const Profile = ({}: Props) => {
+const Profile = () => {
   const { logOut, user } = useProfile();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  if (!user) return logOut();
+  if (!user) {
+    logOut();
+    navigation.navigate("LogIn");
+  }
 
   return (
     <>
       <GoBackTopBar title="Profile" onPressGoBack={() => navigation.goBack()} />
       <Container>
-        <ProfileItem style={{ marginBottom: 20 }} {...user} />
+        <ProfileItem style={{ marginBottom: 20 }} {...user!} />
         <Button mode="contained" textColor="#fff" onPress={logOut}>
-          <Text>Log Out</Text>
+          <Text style={{ color: "#fff" }}>Log Out</Text>
         </Button>
       </Container>
     </>

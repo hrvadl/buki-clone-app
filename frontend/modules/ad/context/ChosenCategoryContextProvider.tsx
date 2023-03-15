@@ -14,9 +14,7 @@ const ChosenCategoryContextProvider = ({ children }: Props) => {
   });
 
   function setActive(name: keyof typeof Subject | "") {
-    name === value.active
-      ? setValue((s) => ({ ...s, active: "" }))
-      : setValue((s) => ({ ...s, active: name }));
+    setValue((s) => ({ ...s, active: name }));
   }
 
   return (
