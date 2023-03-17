@@ -5,7 +5,7 @@ namespace buki_api.modules.ad;
 
 public interface IAdService
 {
-    public List<AdEntity> GetAll(UserContext userContext);
+    public List<AddResponse> GetAll(UserContext userContext, Subject? subject);
 
     public AdEntity GetById(int id);
 

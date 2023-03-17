@@ -43,7 +43,9 @@ const Category = ({
         ]}
       >
         <View style={styles.TextWrapper}>
-          <Text style={styles.Heading}>{name}</Text>
+          <Text style={styles.Heading} variant="boldSmall">
+            {name}
+          </Text>
           <Text>{adQuantity}</Text>
         </View>
         <Image style={styles.Image} source={icon} />

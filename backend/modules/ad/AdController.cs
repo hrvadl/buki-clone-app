@@ -31,4 +31,13 @@ public class AdController : ControllerBase
 
         return Ok(result);
     }
+
+    [Authorize]
+    [HttpGet]
+    public IActionResult GetAll([FromQuery(Name = "subject")] Subject? subject, [FromServices] UserContext userContext)
+    {
+        var result = this.adService.GetAll(userContext, subject);
+
+        return Ok(result);
+    }
 }

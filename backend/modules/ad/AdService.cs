@@ -1,6 +1,7 @@
 using buki_api.db;
 using buki_api.entities;
 using buki_api.modules.exception;
+using Microsoft.EntityFrameworkCore;
 
 namespace buki_api.modules.ad;
 
@@ -13,11 +14,13 @@ public class AdService : IAdService
         this.dbContext = dbContext;
     }
 
-    public List<AdEntity> GetAll(UserContext userContext)
+    public List<AddResponse> GetAll(UserContext userContext, Subject? subject)
     {
-        var res = this.dbContext.Ads.Where(a => a.Author.Role != userContext.Role).ToList();
+        var query = this.dbContext.Ads.Include(e => e.Author).Where(a => a.Author.Role != userContext.Role);
 
-        return res;
+        if (subject is not null) query = query.Where(a => a.Subject == subject);
+
+        return query.Select(e => new AddResponse(e)).ToList();
     }
 
     public AddResponse Add(UserContext userContext, AddAdDTO ad)

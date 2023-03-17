@@ -32,7 +32,7 @@ public class AuthService : IAuthService
 
         if (!isCorrectPassword) throw new ValidationException("Incorrect password");
 
-        var token = this.tokenService.BuildToken(user);
+        var token = this.tokenService.BuildToken(new UserDTO { Email = candidate.Email, Role = candidate.Role });
 
         var res = new LogInResponse
         {
@@ -47,11 +47,11 @@ public class AuthService : IAuthService
         return res;
     }
 
-    async public Task<bool> SignUp(SignUpUserDTO user)
+    public bool SignUp(SignUpUserDTO user)
     {
         if (user.Email is null || user.Password is null || user.Number is null || user.Name is null) throw new ValidationException("There's not enough data");
 
-        var isAlreadyUsed = await this.userRepository.FirstOrDefaultAsync(u => u.Email == user.Email || u.Number == u.Number);
+        var isAlreadyUsed = this.userRepository.FirstOrDefault(u => u.Email == user.Email || u.Number == user.Number);
 
         if (isAlreadyUsed is not null) throw new ValidationException("This user already exists");
 
@@ -60,7 +60,8 @@ public class AuthService : IAuthService
             Email = user.Email,
             Password = this.hashService.Hash(user.Password),
             Name = user.Name,
-            Number = user.Number
+            Number = user.Number,
+            Role = user.Role
         };
 
         this.userRepository.Add(newUser);

@@ -5,7 +5,7 @@ namespace buki_api.modules.auth;
 public interface IAuthService
 {
     public Task<LogInResponse> LogIn(AuthUserDTO user);
-    public Task<bool> SignUp(SignUpUserDTO user);
+    public bool SignUp(SignUpUserDTO user);
     public Task<LogInResponse> CheckToken(UserContext userContext);
 }
 
