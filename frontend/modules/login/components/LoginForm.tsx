@@ -1,4 +1,5 @@
 import Form from "@/design/forms/Form";
+import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NavigationProp, useNavigation } from "@react-navigation/core";
 import React from "react";
@@ -22,7 +23,7 @@ const LoginForm = ({ style }: Props) => {
     mutate(data);
   };
 
-  if (success) navigation.navigate("Home");
+  if (success) navigation.navigate("Home", { screen: "Ads" });
 
   return (
     <Form

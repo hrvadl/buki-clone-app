@@ -10,7 +10,11 @@ const Favorites = () => {
   return (
     <SafeAreaView>
       <Container>
-        {user?.favorites?.length ? <FavoritesList /> : <NotFound />}
+        {user?.favorites?.length ? (
+          <FavoritesList ad={user.favorites} />
+        ) : (
+          <NotFound />
+        )}
       </Container>
     </SafeAreaView>
   );

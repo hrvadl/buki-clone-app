@@ -1,8 +1,8 @@
 import Avatar from "@/design/avatar";
+import { Text } from "@/design/Text";
 import { User } from "@/models/user";
 import React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import { Text } from "react-native-paper";
 
 type Props = {
   style?: ViewStyle;
@@ -16,9 +16,7 @@ const ProfileItem = ({ style, name, email }: Props) => {
         letter={name?.charAt(0)}
       />
       <View>
-        <Text style={{ fontWeight: "bold" }} variant="bodyLarge">
-          {name}
-        </Text>
+        <Text variant="boldLarge">{name}</Text>
         <Text variant="bodyMedium">{email}</Text>
       </View>
     </View>

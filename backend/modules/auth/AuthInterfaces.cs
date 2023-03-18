@@ -1,12 +1,13 @@
 using buki_api.entities;
+using buki_api.modules.ad;
 
 namespace buki_api.modules.auth;
 
 public interface IAuthService
 {
-    public Task<LogInResponse> LogIn(AuthUserDTO user);
-    public Task<bool> SignUp(SignUpUserDTO user);
-    public Task<LogInResponse> CheckToken(UserContext userContext);
+    public Task<UserResponse> LogIn(AuthUserDTO user);
+    public bool SignUp(SignUpUserDTO user);
+    public Task<UserResponse> CheckToken(UserContext userContext);
 }
 
 public class UserDTO
@@ -26,11 +27,11 @@ public class SignUpUserDTO : AuthUserDTO
     public string Number { get; set; } = null!;
 }
 
-public class LogInResponse : AuthUserDTO
+public class UserResponse : AuthUserDTO
 {
     public string Name { get; set; } = null!;
     public string Token { get; set; } = null!;
-    public List<UserEntity> Favorites { get; set; } = null!;
+    public IEnumerable<AdResponse> Favorites { get; set; } = null!;
 }
 
 public interface SignUpResponse

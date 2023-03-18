@@ -13,7 +13,7 @@ const Categories = ({ style }: Props) => {
   const { data } = useCountCategoriesQuery();
   const { active, setActive } = useContext(ChosenCategoryContext);
 
-  const onChooseHandler = useCallback((name: keyof typeof Subject) => {
+  const onChooseHandler = useCallback((name: keyof typeof Subject | "") => {
     setActive(name);
   }, []);
 
@@ -31,7 +31,11 @@ const Categories = ({ style }: Props) => {
           }}
           {...category}
           isActive={category.name === active}
-          onChoose={onChooseHandler}
+          onChoose={
+            category.name === active
+              ? () => onChooseHandler("")
+              : onChooseHandler
+          }
         />
       ))}
     </ScrollView>

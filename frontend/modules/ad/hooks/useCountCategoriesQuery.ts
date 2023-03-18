@@ -1,9 +1,10 @@
+import { SubjectMapping } from "@/models/ad";
 import { Category, Subject } from "@/models/category";
 import { useMemo } from "react";
 import { ImageSourcePropType } from "react-native";
 import { useQuery } from "react-query";
 import { getAndCountCategories } from "../api/count-categories";
-import { initialData, subjectMapping } from "../mocks/categories";
+import { initialData } from "../mocks/categories";
 
 type CategoryAndIcon = Category & { icon: ImageSourcePropType };
 
@@ -11,7 +12,7 @@ export default function useCountCategoriesQuery() {
   const { data, error } = useQuery("count-categories", getAndCountCategories);
 
   data?.forEach((item) => {
-    initialData[subjectMapping[item.name]] = item.adQuantity;
+    initialData[SubjectMapping[item.name]] = item.adQuantity;
   });
 
   const normalizedData = useMemo(() => {

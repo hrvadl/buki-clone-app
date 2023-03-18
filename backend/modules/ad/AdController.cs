@@ -25,9 +25,47 @@ public class AdController : ControllerBase
 
     [Authorize]
     [HttpGet("/{id}")]
-    public IActionResult GetAdById(int id)
+    public IActionResult GetById(int id)
     {
         var result = this.adService.GetById(id);
+
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpGet]
+    public IActionResult GetAll([FromQuery(Name = "subject")] Subject? subject, [FromServices] UserContext userContext)
+    {
+        var result = this.adService.GetAll(userContext, subject);
+
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpGet("top")]
+    public IActionResult GetTop([FromServices] UserContext userContext)
+    {
+        var result = this.adService.GetTop(userContext);
+
+        return Ok(result);
+    }
+
+
+    [Authorize]
+    [HttpPost("like/{id}")]
+    public IActionResult Like([FromServices] UserContext userContext, int id)
+    {
+        var result = this.adService.Like(userContext, id);
+
+        return Ok(result);
+    }
+
+
+    [Authorize]
+    [HttpPost("unlike/{id}")]
+    public IActionResult Unlike([FromServices] UserContext userContext, int id)
+    {
+        var result = this.adService.Unlike(userContext, id);
 
         return Ok(result);
     }

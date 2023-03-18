@@ -1,10 +1,12 @@
 import {
+  AddAdScreen,
   HomeScreen,
   LoginScreen,
   PreSignUpScreen,
   SearchScreen,
   SignUpScreen,
 } from "@/screens";
+import AdScreen from "@/screens/Ad";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -33,6 +35,8 @@ const NavigationRoutes = () => {
           <>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Search" component={SearchScreen} />
+            <Stack.Screen name="AddAd" component={AddAdScreen} />
+            <Stack.Screen name="Ad" component={AdScreen} />
           </>
         ) : (
           <>

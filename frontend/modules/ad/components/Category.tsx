@@ -1,4 +1,6 @@
+import { Text } from "@/design/Text";
 import { Subject } from "@/models/category";
+import { useTheme } from "@react-navigation/native";
 import React, { memo } from "react";
 import {
   Image,
@@ -8,7 +10,6 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { Text } from "react-native-paper";
 
 type Props = {
   name: keyof typeof Subject;
@@ -27,23 +28,29 @@ const Category = ({
   style,
   adQuantity,
 }: Props) => {
+  const theme = useTheme();
+
   return (
-    <TouchableOpacity
-      onPress={() => onChoose(name)}
-      style={[
-        styles.Container,
-        style,
-        {
-          backgroundColor: isActive ? "#ccc" : "transparent",
-        },
-      ]}
-    >
-      <View style={styles.TextWrapper}>
-        <Text style={styles.Heading}>{name}</Text>
-        <Text>{adQuantity}</Text>
-      </View>
-      <Image style={styles.Image} source={icon} />
-    </TouchableOpacity>
+    <View style={styles.Shadow}>
+      <TouchableOpacity
+        onPress={() => onChoose(name)}
+        style={[
+          styles.Container,
+          style,
+          {
+            backgroundColor: isActive ? theme.colors.border : theme.colors.card,
+          },
+        ]}
+      >
+        <View style={styles.TextWrapper}>
+          <Text style={styles.Heading} variant="boldSmall">
+            {name}
+          </Text>
+          <Text>{adQuantity}</Text>
+        </View>
+        <Image style={styles.Image} source={icon} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -54,9 +61,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: "flex",
     alignItems: "center",
-    flexGrow: 1,
-    flexShrink: 0,
     flexDirection: "row",
+    elevation: 2,
+  },
+  Shadow: {
+    shadowColor: "#171717",
+    shadowOffset: { width: 10, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
   },
   Image: {
     height: 30,

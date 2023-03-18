@@ -6,10 +6,3 @@ export const initialData = {
   [Subject.Chemistry]: 0,
   [Subject.Math]: 0,
 };
-
-export const subjectMapping: Record<number, string> = {
-  0: Subject.Physics,
-  1: Subject.IT,
-  2: Subject.Chemistry,
-  3: Subject.Math,
-};

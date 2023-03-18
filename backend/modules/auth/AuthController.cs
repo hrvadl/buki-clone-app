@@ -17,9 +17,9 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("sign-up")]
-    public async Task<ActionResult<SignUpResponse>> SignUp([FromBody] SignUpUserDTO user)
+    public ActionResult<SignUpResponse> SignUp([FromBody] SignUpUserDTO user)
     {
-        var result = await this.authService.SignUp(user);
+        var result = this.authService.SignUp(user);
 
         return result ? Ok(new SignUpRes(true)) : BadRequest(new SignUpRes(false));
     }

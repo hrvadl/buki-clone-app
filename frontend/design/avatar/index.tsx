@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import { Text } from "react-native-paper";
-import generateColor from "./utils/generate-color";
+import { useTheme } from "react-native-paper";
+import { Text } from "../Text";
 
 type Props = {
   letter: string;
@@ -9,9 +9,19 @@ type Props = {
 };
 
 const Avatar = ({ letter, style }: Props) => {
+  const theme = useTheme();
+
   return (
-    <View style={[styles.AvatarContainer, style]}>
-      <Text variant="headlineSmall">{letter}</Text>
+    <View
+      style={[
+        styles.AvatarContainer,
+        style,
+        { backgroundColor: theme.colors.primary },
+      ]}
+    >
+      <Text style={styles.Text} variant="headlineSmall">
+        {letter}
+      </Text>
     </View>
   );
 };
@@ -27,6 +37,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 1000,
-    backgroundColor: generateColor(),
+  },
+  Text: {
+    color: "#fff",
   },
 });

@@ -1,7 +1,9 @@
+import { Picker } from "@react-native-picker/picker";
 import React from "react";
 import { Controller, Path, Resolver, useForm } from "react-hook-form";
 import { StyleProp, StyleSheet, View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, TextInput, useTheme } from "react-native-paper";
+import { Text } from "../Text";
 import { FormField } from "./types";
 
 type Props<T extends { [x: string]: any }> = {
@@ -21,14 +23,12 @@ function Form<T extends { [x: string]: any }>({
   onSubmit,
   resolver,
 }: Props<T>) {
-  const {
-    control,
-    handleSubmit,
-    formState: { isValid, errors },
-  } = useForm<T>({
+  const { control, handleSubmit } = useForm<T>({
     defaultValues,
     resolver,
   });
+
+  const theme = useTheme();
 
   return (
     <View style={style}>
@@ -43,14 +43,37 @@ function Form<T extends { [x: string]: any }>({
             fieldState: { error },
           }) => (
             <View style={styles.TextInput}>
-              <TextInput
-                secureTextEntry={!!field.password}
-                placeholder={field.placeholder}
-                mode="outlined"
-                onChangeText={onChange}
-                onBlur={onBlur}
-                value={value}
-              />
+              {field.type === "text" ? (
+                <TextInput
+                  secureTextEntry={!!field.password}
+                  placeholder={field.placeholder}
+                  mode="outlined"
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              ) : (
+                <View
+                  style={[
+                    styles.PickerContainer,
+                    { borderColor: theme.colors.onSurfaceVariant },
+                  ]}
+                >
+                  <Picker
+                    style={styles.Picker}
+                    selectedValue={value}
+                    onValueChange={onChange}
+                  >
+                    {field.items.map((it) => (
+                      <Picker.Item
+                        key={it.label}
+                        label={it.label}
+                        value={it.value}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+              )}
               {error && <Text style={styles.Error}>{error.message}</Text>}
             </View>
           )}
@@ -62,7 +85,7 @@ function Form<T extends { [x: string]: any }>({
         mode="contained"
         onPress={handleSubmit(onSubmit)}
       >
-        <Text>{buttonText}</Text>
+        <Text style={{ color: "#fff" }}>{buttonText}</Text>
       </Button>
     </View>
   );
@@ -80,6 +103,15 @@ const styles = StyleSheet.create({
   },
   Button: {
     marginTop: 10,
+  },
+  Picker: {
+    padding: 10,
+    backgroundColor: "#fff",
+  },
+  PickerContainer: {
+    borderWidth: 1,
+    overflow: "hidden",
+    borderRadius: 5,
   },
 });
 

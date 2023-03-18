@@ -3,6 +3,7 @@ import defaultValues from "./form-default";
 
 const signUpFields: FormField<typeof defaultValues>[] = [
   {
+    type: "text",
     name: "name",
     placeholder: "Name",
     rules: {
@@ -10,6 +11,7 @@ const signUpFields: FormField<typeof defaultValues>[] = [
     },
   },
   {
+    type: "text",
     name: "email",
     placeholder: "Email",
     rules: {
@@ -17,6 +19,7 @@ const signUpFields: FormField<typeof defaultValues>[] = [
     },
   },
   {
+    type: "text",
     name: "number",
     placeholder: "Telephone number +380...",
     rules: {
@@ -24,6 +27,7 @@ const signUpFields: FormField<typeof defaultValues>[] = [
     },
   },
   {
+    type: "text",
     name: "password",
     placeholder: "Password",
     password: true,
@@ -32,6 +36,7 @@ const signUpFields: FormField<typeof defaultValues>[] = [
     },
   },
   {
+    type: "text",
     name: "confirmPassword",
     placeholder: "Confirm Password",
     password: true,
