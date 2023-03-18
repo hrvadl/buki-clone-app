@@ -11,9 +11,14 @@ import { StyleSheet } from "react-native";
 type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
 
 const SignUp = ({ navigation, route }: Props) => {
-  const {
-    params: { role },
-  } = route;
+  const { params } = route;
+
+  if (!params) {
+    navigation.navigate("PreSignUp");
+    return null;
+  }
+
+  const { role } = params;
 
   const onPressGoBack = () => {
     navigation.goBack();

@@ -1,5 +1,4 @@
 import { Text } from "@/design/Text";
-import { oppositeRoleMap } from "@/models/user";
 import { UserContext } from "@/modules/navigation/context/user-context";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -14,7 +13,7 @@ const NotFound = () => {
 
   if (!user) return null;
 
-  const role = oppositeRoleMap[+user.role]?.toLowerCase();
+  const role = +user.role === 0 ? "student" : "teacher";
 
   return (
     <View style={styles.Container}>

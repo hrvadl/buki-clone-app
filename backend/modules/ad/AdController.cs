@@ -25,7 +25,7 @@ public class AdController : ControllerBase
 
     [Authorize]
     [HttpGet("/{id}")]
-    public IActionResult GetAdById(int id)
+    public IActionResult GetById(int id)
     {
         var result = this.adService.GetById(id);
 
@@ -37,6 +37,15 @@ public class AdController : ControllerBase
     public IActionResult GetAll([FromQuery(Name = "subject")] Subject? subject, [FromServices] UserContext userContext)
     {
         var result = this.adService.GetAll(userContext, subject);
+
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpGet("top")]
+    public IActionResult GetTop([FromServices] UserContext userContext)
+    {
+        var result = this.adService.GetTop(userContext);
 
         return Ok(result);
     }

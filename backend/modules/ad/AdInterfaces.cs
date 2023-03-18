@@ -5,11 +5,13 @@ namespace buki_api.modules.ad;
 
 public interface IAdService
 {
-    public List<AddResponse> GetAll(UserContext userContext, Subject? subject);
+    public List<AdResponse> GetAll(UserContext userContext, Subject? subject);
 
-    public AdEntity GetById(int id);
+    public List<AdResponse> GetTop(UserContext userContext);
 
-    public AddResponse Add(UserContext userContext, AddAdDTO ad);
+    public AdResponse GetById(int id);
+
+    public AdResponse Add(UserContext userContext, AddAdDTO ad);
 }
 
 public class UserWithoutRelation
@@ -35,7 +37,7 @@ public class UserWithoutRelation
     }
 }
 
-public class AddResponse
+public class AdResponse
 {
     public int Id { get; set; }
 
@@ -43,7 +45,7 @@ public class AddResponse
 
     public UserWithoutRelation Author { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public AddResponse(AdEntity ad)
+    public AdResponse(AdEntity ad)
     {
         this.Id = ad.Id;
         this.Subject = ad.Subject;
