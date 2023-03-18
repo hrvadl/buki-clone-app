@@ -21,5 +21,12 @@ public class MyDbContext : DbContext
         modelBuilder.Entity<ReviewEntity>().HasOne(e => e.Reviewee).WithMany(e => e.RecievedReviews).HasForeignKey(e => e.RevieweeId);
 
         modelBuilder.Entity<ReviewEntity>().HasOne(e => e.Reviewer).WithMany(e => e.GivenReviews).HasForeignKey(e => e.ReviewerId);
+
+        modelBuilder.Entity<AdEntity>().HasOne(e => e.Author).WithMany(e => e.Ads).HasForeignKey(e => e.AuthorId);
+
+        modelBuilder.Entity<UserEntity>()
+             .HasMany<AdEntity>(s => s.Favorites)
+             .WithMany(c => c.LikedBy)
+             .UsingEntity(j => j.ToTable("UserFavorites"));
     }
 }

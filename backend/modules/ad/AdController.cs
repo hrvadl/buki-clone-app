@@ -49,4 +49,24 @@ public class AdController : ControllerBase
 
         return Ok(result);
     }
+
+
+    [Authorize]
+    [HttpPost("like/{id}")]
+    public IActionResult Like([FromServices] UserContext userContext, int id)
+    {
+        var result = this.adService.Like(userContext, id);
+
+        return Ok(result);
+    }
+
+
+    [Authorize]
+    [HttpPost("unlike/{id}")]
+    public IActionResult Unlike([FromServices] UserContext userContext, int id)
+    {
+        var result = this.adService.Unlike(userContext, id);
+
+        return Ok(result);
+    }
 }

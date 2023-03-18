@@ -1,3 +1,5 @@
+using buki_api.modules.ad;
+
 namespace buki_api.entities;
 
 public enum UserRole
@@ -28,5 +30,5 @@ public class UserEntity
 
     public List<ReviewEntity> RecievedReviews { get; set; } = null!;
 
-    public List<UserEntity> Favorites { get; set; } = null!;
+    public ICollection<AdEntity> Favorites { get; set; } = null!;
 }

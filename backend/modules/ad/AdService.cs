@@ -1,5 +1,6 @@
 using buki_api.db;
 using buki_api.entities;
+using buki_api.modules.auth;
 using buki_api.modules.exception;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,5 +55,54 @@ public class AdService : IAdService
         var ad = this.dbContext.Ads.Include(e => e.Author).FirstOrDefault(e => e.Id == id);
 
         return new AdResponse(ad!);
+    }
+
+    public UserResponse Like(UserContext userCtx, int id)
+    {
+        var user = this.dbContext.Users.FirstOrDefault(e => e.Email == userCtx.Email);
+
+        if (user is null) throw new ValidationException("User cannot be found");
+
+        var ad = this.dbContext.Ads.FirstOrDefault(e => e.Id == id);
+
+        if (ad is null) throw new ValidationException("Ad cannot be found");
+
+        user.Favorites.Add(ad);
+        this.dbContext.SaveChanges();
+
+        var response = new UserResponse
+        {
+            Favorites = user.Favorites,
+            Email = user.Email,
+            Name = user.Name,
+            Password = user.Password,
+            Role = user.Role,
+        };
+        return response;
+    }
+
+
+    public UserResponse Unlike(UserContext userCtx, int id)
+    {
+        var user = this.dbContext.Users.FirstOrDefault(e => e.Email == userCtx.Email);
+
+        if (user is null) throw new ValidationException("User cannot be found");
+
+        var ad = this.dbContext.Ads.FirstOrDefault(e => e.Id == id);
+
+        if (ad is null) throw new ValidationException("Ad cannot be found");
+
+        user.Favorites.Remove(ad);
+        this.dbContext.SaveChanges();
+
+        var response = new UserResponse
+        {
+            Favorites = user.Favorites,
+            Email = user.Email,
+            Name = user.Name,
+            Password = user.Password,
+            Role = user.Role,
+        };
+        return response;
     }
 }

@@ -31,7 +31,7 @@ public class TokenService : ITokenService
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
              }),
-            Expires = DateTime.UtcNow.AddMinutes(1),
+            Expires = DateTime.UtcNow.AddMonths(1),
             Issuer = this.Issuer,
             Audience = this.Audience,
             SigningCredentials = new SigningCredentials

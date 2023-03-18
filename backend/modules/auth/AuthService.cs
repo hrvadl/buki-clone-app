@@ -21,10 +21,9 @@ public class AuthService : IAuthService
         this.tokenService = _tokenService;
     }
 
-    async public Task<LogInResponse> LogIn(AuthUserDTO user)
+    async public Task<UserResponse> LogIn(AuthUserDTO user)
     {
-        //Include
-        var candidate = await this.userRepository.FirstOrDefaultAsync(u => u.Email == user.Email);
+        var candidate = await this.userRepository.Include(e => e.Favorites).FirstOrDefaultAsync(u => u.Email == user.Email);
 
         if (candidate is null) throw new ValidationException("Incorrect email");
 
@@ -34,7 +33,7 @@ public class AuthService : IAuthService
 
         var token = this.tokenService.BuildToken(new UserDTO { Email = candidate.Email, Role = candidate.Role });
 
-        var res = new LogInResponse
+        var res = new UserResponse
         {
             Favorites = candidate.Favorites,
             Name = candidate.Name,
@@ -51,7 +50,7 @@ public class AuthService : IAuthService
     {
         if (user.Email is null || user.Password is null || user.Number is null || user.Name is null) throw new ValidationException("There's not enough data");
 
-        var isAlreadyUsed = this.userRepository.FirstOrDefault(u => u.Email == user.Email || u.Number == user.Number);
+        var isAlreadyUsed = this.userRepository.Include(e => e.Favorites).FirstOrDefault(u => u.Email == user.Email || u.Number == user.Number);
 
         if (isAlreadyUsed is not null) throw new ValidationException("This user already exists");
 
@@ -70,13 +69,13 @@ public class AuthService : IAuthService
         return true;
     }
 
-    async public Task<LogInResponse> CheckToken(UserContext userContext)
+    async public Task<UserResponse> CheckToken(UserContext userContext)
     {
         var user = await this.userRepository.FirstOrDefaultAsync(u => u.Email == userContext.Email);
 
         if (user is null) throw new UnauthorizedAccessException("Jwt token is not valid");
 
-        var response = new LogInResponse
+        var response = new UserResponse
         {
             Favorites = user.Favorites,
             Email = user.Email,

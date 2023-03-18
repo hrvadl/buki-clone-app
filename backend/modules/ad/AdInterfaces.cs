@@ -12,6 +12,10 @@ public interface IAdService
     public AdResponse GetById(int id);
 
     public AdResponse Add(UserContext userContext, AddAdDTO ad);
+
+    public UserResponse Like(UserContext userContext, int id);
+
+    public UserResponse Unlike(UserContext userContext, int id);
 }
 
 public class UserWithoutRelation
