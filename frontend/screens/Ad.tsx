@@ -1,5 +1,7 @@
+import Container from "@/design/container/Container";
 import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
 import { AdHeading, useReactionMutation } from "@/modules/ad-by-id";
+import AdTabs from "@/modules/ad-by-id/components/AdTabs";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
@@ -23,6 +25,9 @@ const AdScreen = ({ navigation, route }: Props) => {
         title="Advertisement"
       />
       <AdHeading ad={ad} isLiked={isLiked} onReactHandler={onReactHandler} />
+      <Container>
+        <AdTabs ad={ad} />
+      </Container>
     </View>
   );
 };

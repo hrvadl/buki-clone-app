@@ -2,7 +2,7 @@ import { Subject } from "../category";
 import { User } from "../user";
 
 export type Ad = {
-  subject: keyof typeof Subject;
+  subject: keyof typeof SubjectMapping;
   id: number;
   author: User;
   description: string;

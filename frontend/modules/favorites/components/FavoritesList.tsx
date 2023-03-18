@@ -22,6 +22,7 @@ const FavoritesList = ({ ad }: Props) => {
     >
       {ad.map((ad) => (
         <Ad
+          key={ad.id}
           style={{ marginVertical: 10 }}
           onPress={() => navigation.navigate("Ad", { ad })}
           ad={ad}
