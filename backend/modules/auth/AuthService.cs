@@ -1,5 +1,6 @@
 using buki_api.db;
 using buki_api.entities;
+using buki_api.modules.ad;
 using buki_api.modules.exception;
 using buki_api.modules.hash;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ public class AuthService : IAuthService
 
     async public Task<UserResponse> LogIn(AuthUserDTO user)
     {
-        var candidate = await this.userRepository.Include(e => e.Favorites).FirstOrDefaultAsync(u => u.Email == user.Email);
+        var candidate = await this.userRepository.Include(e => e.Favorites).ThenInclude(v => v.Author).FirstOrDefaultAsync(u => u.Email == user.Email);
 
         if (candidate is null) throw new ValidationException("Incorrect email");
 
@@ -35,7 +36,7 @@ public class AuthService : IAuthService
 
         var res = new UserResponse
         {
-            Favorites = candidate.Favorites,
+            Favorites = candidate.Favorites.ToList().ConvertAll(e => new AdResponse(e)),
             Name = candidate.Name,
             Email = candidate.Email,
             Password = candidate.Password,
@@ -71,13 +72,13 @@ public class AuthService : IAuthService
 
     async public Task<UserResponse> CheckToken(UserContext userContext)
     {
-        var user = await this.userRepository.FirstOrDefaultAsync(u => u.Email == userContext.Email);
+        var user = await this.userRepository.Include(e => e.Favorites).ThenInclude(e => e.Author).FirstOrDefaultAsync(u => u.Email == userContext.Email);
 
         if (user is null) throw new UnauthorizedAccessException("Jwt token is not valid");
 
         var response = new UserResponse
         {
-            Favorites = user.Favorites,
+            Favorites = user.Favorites.ToList().ConvertAll(e => new AdResponse(e)),
             Email = user.Email,
             Name = user.Name,
             Password = user.Password,

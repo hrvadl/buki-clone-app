@@ -1,3 +1,4 @@
+import { Ad } from "@/models/ad";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { HomeTabs } from "./home-tabs";
 
@@ -8,4 +9,5 @@ export type RootStackParamList = {
   LogIn: undefined;
   Search: undefined;
   AddAd: undefined;
+  Ad: { ad: Ad } | undefined;
 };

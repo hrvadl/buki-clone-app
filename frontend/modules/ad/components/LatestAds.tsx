@@ -1,3 +1,5 @@
+import { RootStackParamList } from "@/modules/navigation/types/root-stack";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
@@ -10,6 +12,8 @@ type Props = {
 
 const LatestAds = ({ style }: Props) => {
   const { data, isLoading } = useFetchAds();
+  const navigation =
+    useNavigation<NavigationProp<RootStackParamList, "AddAd">>();
 
   return (
     <View style={style}>
@@ -19,7 +23,13 @@ const LatestAds = ({ style }: Props) => {
       {!data || isLoading ? (
         <ActivityIndicator />
       ) : (
-        data.map((it) => <Ad ad={it} />)
+        data.map((ad) => (
+          <Ad
+            onPress={() => navigation.navigate("Ad", { ad })}
+            style={{ marginVertical: 10 }}
+            ad={ad}
+          />
+        ))
       )}
     </View>
   );

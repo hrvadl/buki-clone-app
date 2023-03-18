@@ -59,7 +59,7 @@ public class AdService : IAdService
 
     public UserResponse Like(UserContext userCtx, int id)
     {
-        var user = this.dbContext.Users.FirstOrDefault(e => e.Email == userCtx.Email);
+        var user = this.dbContext.Users.Include(u => u.Favorites).ThenInclude(p => p.Author).FirstOrDefault(e => e.Email == userCtx.Email);
 
         if (user is null) throw new ValidationException("User cannot be found");
 
@@ -72,7 +72,7 @@ public class AdService : IAdService
 
         var response = new UserResponse
         {
-            Favorites = user.Favorites,
+            Favorites = user.Favorites.ToList().ConvertAll(e => new AdResponse(e)),
             Email = user.Email,
             Name = user.Name,
             Password = user.Password,
@@ -84,7 +84,7 @@ public class AdService : IAdService
 
     public UserResponse Unlike(UserContext userCtx, int id)
     {
-        var user = this.dbContext.Users.FirstOrDefault(e => e.Email == userCtx.Email);
+        var user = this.dbContext.Users.Include(u => u.Favorites).ThenInclude(p => p.Author).FirstOrDefault(e => e.Email == userCtx.Email);
 
         if (user is null) throw new ValidationException("User cannot be found");
 
@@ -97,7 +97,7 @@ public class AdService : IAdService
 
         var response = new UserResponse
         {
-            Favorites = user.Favorites,
+            Favorites = user.Favorites.ToList().ConvertAll(e => new AdResponse(e)),
             Email = user.Email,
             Name = user.Name,
             Password = user.Password,

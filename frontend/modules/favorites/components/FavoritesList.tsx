@@ -1,14 +1,33 @@
-import { Text } from "@/design/Text";
+import { Ad as AdType } from "@/models/ad";
+import Ad from "@/modules/ad/components/Ad";
+import { RootStackParamList } from "@/modules/navigation/types/root-stack";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 
-type Props = {};
+type Props = {
+  ad: AdType[];
+};
 
-const FavoritesList = (props: Props) => {
+const FavoritesList = ({ ad }: Props) => {
+  const navigation =
+    useNavigation<NavigationProp<RootStackParamList, "Home">>();
+
   return (
-    <View>
-      <Text>FavoritesList</Text>
-    </View>
+    <ScrollView
+      contentContainerStyle={{
+        paddingBottom: 60,
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      {ad.map((ad) => (
+        <Ad
+          style={{ marginVertical: 10 }}
+          onPress={() => navigation.navigate("Ad", { ad })}
+          ad={ad}
+        />
+      ))}
+    </ScrollView>
   );
 };
 

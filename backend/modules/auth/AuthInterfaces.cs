@@ -1,4 +1,5 @@
 using buki_api.entities;
+using buki_api.modules.ad;
 
 namespace buki_api.modules.auth;
 
@@ -30,7 +31,7 @@ public class UserResponse : AuthUserDTO
 {
     public string Name { get; set; } = null!;
     public string Token { get; set; } = null!;
-    public IEnumerable<AdEntity> Favorites { get; set; } = null!;
+    public IEnumerable<AdResponse> Favorites { get; set; } = null!;
 }
 
 public interface SignUpResponse
