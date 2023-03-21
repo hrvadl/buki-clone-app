@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace buki_api.modules.auth;
 
-public class AuthService : IAuthService
+public class UserService : IUserService
 {
     DbSet<UserEntity> userRepository;
     MyDbContext context;
     IHashPassword hashService;
     ITokenService tokenService;
 
-    public AuthService(MyDbContext dbContext, IHashPassword _hashService, ITokenService _tokenService)
+    public UserService(MyDbContext dbContext, IHashPassword _hashService, ITokenService _tokenService)
     {
         this.context = dbContext;
         this.userRepository = dbContext.Users;
@@ -87,5 +87,11 @@ public class AuthService : IAuthService
         };
 
         return response;
+    }
+    public UserEntity GetUser(UserContext ctx, int id)
+    {
+        var user = this.userRepository.Include(e => e.RecievedReviews).ThenInclude(r => r.Reviewer).Include(e => e.Ads).First(e => e.Id == id);
+
+        return user;
     }
 }

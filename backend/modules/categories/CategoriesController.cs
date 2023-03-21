@@ -15,9 +15,9 @@ public class CategoriesController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public IActionResult GetAllCategories()
+    public IActionResult GetAllCategories([FromServices] UserContext ctx)
     {
-        var result = this.categoryService.GetAll();
+        var result = this.categoryService.GetAll(ctx);
 
         return Ok(result);
     }

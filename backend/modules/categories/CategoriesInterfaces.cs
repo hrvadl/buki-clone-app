@@ -14,5 +14,5 @@ public class GetCategoryDTO
 
 public interface ICategoryService
 {
-    public List<CategoryResponse> GetAll();
+    public List<CategoryResponse> GetAll(UserContext ctx);
 }

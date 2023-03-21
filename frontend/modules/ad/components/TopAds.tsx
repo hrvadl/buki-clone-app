@@ -2,7 +2,7 @@ import { Text } from "@/design/Text";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { ScrollView, StyleSheet, View, ViewStyle } from "react-native";
+import { FlatList, StyleSheet, View, ViewStyle } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import useGetTopAdsQuery from "../hooks/useGetTopAdsQuery";
 import Ad from "./Ad";
@@ -29,21 +29,24 @@ const TopAds = ({ style }: Props) => {
       {isLoading && !error ? (
         <ActivityIndicator size="small" />
       ) : (
-        <ScrollView
+        <FlatList
           contentContainerStyle={{
             paddingVertical: 10,
           }}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-        >
-          {data.map((ad) => (
+          data={data}
+          renderItem={({ item: ad }) => (
             <Ad
+              onPressAvatar={() =>
+                navigation.navigate("ProfileById", { id: ad.author.id })
+              }
               style={styles.Ad}
               onPress={() => navigation.navigate("Ad", { ad })}
               ad={ad}
             />
-          ))}
-        </ScrollView>
+          )}
+        />
       )}
     </View>
   );

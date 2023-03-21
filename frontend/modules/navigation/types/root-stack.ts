@@ -10,4 +10,5 @@ export type RootStackParamList = {
   Search: undefined;
   AddAd: undefined;
   Ad: { ad: Ad } | undefined;
+  ProfileById: { id: number } | undefined;
 };

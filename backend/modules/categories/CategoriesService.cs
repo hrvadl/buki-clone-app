@@ -12,9 +12,9 @@ public class CategoriesService : ICategoryService
         this.context = context;
     }
 
-    public List<CategoryResponse> GetAll()
+    public List<CategoryResponse> GetAll(UserContext ctx)
     {
-        var result = this.context.Ads.GroupBy(e => e.Subject).ToList();
+        var result = this.context.Ads.Where(e => e.Author.Role != ctx.Role).GroupBy(e => e.Subject).ToList();
 
         return result.ConvertAll(i => new CategoryResponse
         {

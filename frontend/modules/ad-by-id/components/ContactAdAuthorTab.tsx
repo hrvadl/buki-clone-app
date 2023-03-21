@@ -1,6 +1,8 @@
 import Avatar from "@/design/avatar";
 import { Text } from "@/design/Text";
 import { User } from "@/models/user";
+import { RootStackParamList } from "@/modules/navigation/types/root-stack";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -9,10 +11,16 @@ type Props = {
 };
 
 const ContactAdAuthorTab = ({ author }: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList, "Ad">>();
+
   return (
     <View>
       <View style={styles.AvatarContainer}>
-        <Avatar style={styles.Avatar} letter={author.name.charAt(0)} />
+        <Avatar
+          onPress={() => navigation.navigate("ProfileById", { id: author.id })}
+          style={styles.Avatar}
+          letter={author.name.charAt(0)}
+        />
       </View>
       <Text variant="bodyLarge" style={styles.Text}>
         Email: {author.email}

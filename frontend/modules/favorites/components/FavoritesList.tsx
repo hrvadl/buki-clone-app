@@ -22,6 +22,9 @@ const FavoritesList = ({ ad }: Props) => {
     >
       {ad.map((ad) => (
         <Ad
+          onPressAvatar={() =>
+            navigation.navigate("ProfileById", { id: ad.author.id })
+          }
           key={ad.id}
           style={{ marginVertical: 10 }}
           onPress={() => navigation.navigate("Ad", { ad })}

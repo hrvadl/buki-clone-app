@@ -12,10 +12,10 @@ public class ReviewController : ControllerBase
         this.reviewService = reviewService;
     }
 
-    [HttpGet]
-    public IActionResult GetAllReviews()
+    [HttpGet("{id}")]
+    public IActionResult GetAllReviews(int id)
     {
-        var result = this.reviewService.GetAll();
+        var result = this.reviewService.GetAll(id);
 
         return Ok(result);
     }

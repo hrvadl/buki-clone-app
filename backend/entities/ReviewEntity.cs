@@ -6,6 +6,8 @@ public class ReviewEntity
 
     public string Text { get; set; } = null!;
 
+    public int Rate { get; set; }
+
     public UserEntity Reviewer { get; set; } = null!;
 
     public int ReviewerId { get; set; }

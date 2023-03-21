@@ -3,20 +3,20 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace buki_api.modules.auth;
 
-[Route("api/auth")]
+[Route("api/user")]
 [ApiController]
-public class AuthController : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly IAuthService authService;
+    private readonly IUserService authService;
     private readonly ITokenService tokenService;
-    public AuthController(IAuthService authService, ITokenService tokenService)
+    public UserController(IUserService authService, ITokenService tokenService)
     {
         this.tokenService = tokenService;
         this.authService = authService;
     }
 
     [AllowAnonymous]
-    [HttpPost("sign-up")]
+    [HttpPost("auth/sign-up")]
     public ActionResult<SignUpResponse> SignUp([FromBody] SignUpUserDTO user)
     {
         var result = this.authService.SignUp(user);
@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
     }
 
     [AllowAnonymous]
-    [HttpPost("log-in")]
+    [HttpPost("auth/log-in")]
     public async Task<IActionResult> LogIn([FromBody] AuthUserDTO user)
     {
         var result = await this.authService.LogIn(user);
@@ -33,10 +33,17 @@ public class AuthController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet]
+    [HttpGet("auth")]
     public async Task<IActionResult> CheckToken([FromServices] UserContext userContext)
     {
         var result = await this.authService.CheckToken(userContext);
+        return Ok(result);
+    }
+    [Authorize]
+    [HttpGet("{id}")]
+    public IActionResult GetById([FromServices] UserContext userContext, int id)
+    {
+        var result = this.authService.GetUser(userContext, id);
         return Ok(result);
     }
 }

@@ -7,7 +7,7 @@ export type SignUpProps = typeof defaultValues & {
 };
 
 const SIGN_UP_URLS = {
-  SignUp: `${Environment.REACT_APP_API_URL}/api/auth/sign-up/`,
+  SignUp: `${Environment.REACT_APP_API_URL}/api/user/auth/sign-up/`,
 };
 
 export async function signUp(props: SignUpProps) {

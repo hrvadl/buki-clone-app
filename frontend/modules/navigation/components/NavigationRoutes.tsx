@@ -3,6 +3,7 @@ import {
   HomeScreen,
   LoginScreen,
   PreSignUpScreen,
+  ProfileScreen,
   SearchScreen,
   SignUpScreen,
 } from "@/screens";
@@ -37,6 +38,7 @@ const NavigationRoutes = () => {
             <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="AddAd" component={AddAdScreen} />
             <Stack.Screen name="Ad" component={AdScreen} />
+            <Stack.Screen name="ProfileById" component={ProfileScreen} />
           </>
         ) : (
           <>

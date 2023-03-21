@@ -1,4 +1,5 @@
 import { Ad } from "../ad";
+import { Review } from "../review";
 
 export type UserRole = "Student" | "Teacher";
 
@@ -12,6 +13,8 @@ export type User = {
   description: string;
   token: string;
   favorites: Ad[];
+  ads?: Ad[];
+  recievedReviews?: Review[];
 };
 
 export const roleMap = {
