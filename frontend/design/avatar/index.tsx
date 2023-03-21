@@ -1,18 +1,20 @@
 import React, { memo } from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { Pressable, StyleSheet, ViewStyle } from "react-native";
 import { useTheme } from "react-native-paper";
 import { Text } from "../Text";
 
 type Props = {
   letter: string;
   style?: ViewStyle;
+  onPress?: () => void;
 };
 
-const Avatar = ({ letter, style }: Props) => {
+const Avatar = ({ letter, style, onPress }: Props) => {
   const theme = useTheme();
 
   return (
-    <View
+    <Pressable
+      onPress={onPress}
       style={[
         styles.AvatarContainer,
         style,
@@ -22,7 +24,7 @@ const Avatar = ({ letter, style }: Props) => {
       <Text style={styles.Text} variant="headlineSmall">
         {letter}
       </Text>
-    </View>
+    </Pressable>
   );
 };
 

@@ -8,9 +8,10 @@ type Props = {
   ad: AdType;
   style?: ViewStyle;
   onPress: (id: number) => void;
+  onPressAvatar?: (id: number) => void;
 };
 
-const Ad = ({ ad, style, onPress }: Props) => {
+const Ad = ({ ad, style, onPress, onPressAvatar }: Props) => {
   return (
     <Card onPress={() => onPress(ad.id)} style={[style]}>
       <Card.Cover
@@ -21,7 +22,11 @@ const Ad = ({ ad, style, onPress }: Props) => {
         <Text style={styles.Text} numberOfLines={1} variant="bodyLarge">
           {ad.description}
         </Text>
-        <Avatar style={styles.Avatar} letter={ad.author.name.charAt(0)} />
+        <Avatar
+          onPress={() => onPressAvatar?.(ad.id)}
+          style={styles.Avatar}
+          letter={ad.author.name.charAt(0)}
+        />
       </Card.Content>
     </Card>
   );

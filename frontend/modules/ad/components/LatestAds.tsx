@@ -25,6 +25,10 @@ const LatestAds = ({ style }: Props) => {
       ) : (
         data.map((ad) => (
           <Ad
+            key={ad.id}
+            onPressAvatar={() =>
+              navigation.navigate("ProfileById", { id: ad.author.id })
+            }
             onPress={() => navigation.navigate("Ad", { ad })}
             style={{ marginVertical: 10 }}
             ad={ad}

@@ -5,14 +5,23 @@ using buki_api.modules.auth;
 using buki_api.modules.categories;
 using buki_api.modules.hash;
 using buki_api.modules.middlewares;
+using buki_api.modules.review;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    // Use the default property (Pascal) casing
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthentication(options =>
@@ -47,9 +56,11 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<UserContext>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAdService, AdService>();
 builder.Services.AddScoped<ICategoryService, CategoriesService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSingleton<IHashPassword, HashService>();
