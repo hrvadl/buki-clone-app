@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../:/workspaces/buki-app/
+      - ../:/backend
     command: sleep infinity
     user: root
     network_mode: service:database

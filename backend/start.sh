@@ -1,6 +1,7 @@
 npm i -g @devcontainers/cli
 
 filepath="./.devcontainer/devcontainer.json"
+cp ./buki-api.csproj ./.devcontainer/
 host=$(hostname -I | awk '{print $1}')
 template='"forwardPorts": ["%s", 5127]'
 

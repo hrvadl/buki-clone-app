@@ -2146,11 +2146,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/workspaces/buki-app/backend/buki-api.csproj",
+      "projectUniqueName": "/backend/buki-api.csproj",
       "projectName": "buki-api",
-      "projectPath": "/workspaces/buki-app/backend/buki-api.csproj",
+      "projectPath": "/backend/buki-api.csproj",
       "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/workspaces/buki-app/backend/obj/",
+      "outputPath": "/backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/root/.nuget/NuGet/NuGet.Config"
@@ -2237,7 +2237,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }

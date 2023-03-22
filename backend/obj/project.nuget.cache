@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C45fMewMS5pNFv6hVcYOMS5l7Fn4rfF7mRJz0Hz239cNV2rv/BU8GEjriyCeFgEVIaEG21SeAw1aLVsFQTc/cA==",
+  "dgSpecHash": "w+ndCd6ajZVKNBiOi4byfbycB8FV7aAKvjBNVKrnNbNdqjyHB17A3jRzmQ/u/QlsDsgKJ4/MxZMvAHNpkkc8nA==",
   "success": true,
-  "projectFilePath": "/workspaces/buki-app/backend/buki-api.csproj",
+  "projectFilePath": "/backend/buki-api.csproj",
   "expectedPackageFiles": [
     "/root/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/root/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
