@@ -24,7 +24,7 @@ public class AdController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("/{id}")]
+    [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
         var result = this.adService.GetById(id);
@@ -60,12 +60,21 @@ public class AdController : ControllerBase
         return Ok(result);
     }
 
-
     [Authorize]
     [HttpPost("unlike/{id}")]
     public IActionResult Unlike([FromServices] UserContext userContext, int id)
     {
         var result = this.adService.Unlike(userContext, id);
+
+        return Ok(result);
+    }
+
+
+    [Authorize]
+    [HttpDelete("{id}")]
+    public IActionResult Delete([FromServices] UserContext userContext, int id)
+    {
+        var result = this.adService.Delete(userContext, id);
 
         return Ok(result);
     }

@@ -24,7 +24,8 @@ public class UserService : IUserService
 
     async public Task<UserResponse> LogIn(AuthUserDTO user)
     {
-        var candidate = await this.userRepository.Include(e => e.Favorites).ThenInclude(v => v.Author).FirstOrDefaultAsync(u => u.Email == user.Email);
+        var candidate = await this.userRepository.Include(e => e.Favorites).ThenInclude(e => e.Author).Include(e => e.Ads).Include(e => e.RecievedReviews).ThenInclude(e => e.Reviewer).FirstOrDefaultAsync(u => u.Email == user.Email);
+
 
         if (candidate is null) throw new ValidationException("Incorrect email");
 
@@ -41,7 +42,9 @@ public class UserService : IUserService
             Email = candidate.Email,
             Password = candidate.Password,
             Role = candidate.Role,
-            Token = token
+            Token = token,
+            RecievedReviews = candidate.RecievedReviews,
+            Ads = candidate.Ads
         };
 
         return res;
@@ -72,7 +75,7 @@ public class UserService : IUserService
 
     async public Task<UserResponse> CheckToken(UserContext userContext)
     {
-        var user = await this.userRepository.Include(e => e.Favorites).ThenInclude(e => e.Author).FirstOrDefaultAsync(u => u.Email == userContext.Email);
+        var user = await this.userRepository.Include(e => e.Favorites).ThenInclude(e => e.Author).Include(e => e.Ads).Include(e => e.RecievedReviews).ThenInclude(e => e.Reviewer).FirstOrDefaultAsync(u => u.Email == userContext.Email);
 
         if (user is null) throw new UnauthorizedAccessException("Jwt token is not valid");
 
@@ -83,7 +86,9 @@ public class UserService : IUserService
             Name = user.Name,
             Password = user.Password,
             Role = user.Role,
-            Token = userContext.Token
+            Token = userContext.Token,
+            Ads = user.Ads,
+            RecievedReviews = user.RecievedReviews
         };
 
         return response;

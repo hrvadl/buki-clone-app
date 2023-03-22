@@ -5,4 +5,5 @@ export type Review = {
   reviewee: User;
   text: string;
   rate: number;
+  id: number;
 };

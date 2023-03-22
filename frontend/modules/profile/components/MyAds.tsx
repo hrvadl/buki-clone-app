@@ -18,19 +18,19 @@ const MyAds = ({ ads, style }: Props) => {
   return (
     <View style={style}>
       {ads.map((ad) => (
-        <GestureHandlerRootView>
+        <GestureHandlerRootView key={ad.id}>
           <Swipeable
-            containerStyle={{}}
+            containerStyle={styles.Card}
             useNativeAnimations
             renderRightActions={() => (
               <DeleteOnSwipeButton
                 onPress={() => onDelete(ad.id)}
                 buttonWidth={100}
-                style={{ position: "relative", width: 80 }}
+                style={styles.DeleteOnSwipeButton}
               />
             )}
           >
-            <Ad ad={ad} onPress={() => {}} />
+            <Ad ad={ad} />
           </Swipeable>
         </GestureHandlerRootView>
       ))}
@@ -39,9 +39,10 @@ const MyAds = ({ ads, style }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  Title: {
-    marginTop: 15,
+  Card: {
+    paddingBottom: 15,
   },
+  DeleteOnSwipeButton: { position: "relative", width: 80, marginBottom: 15 },
 });
 
 export default MyAds;

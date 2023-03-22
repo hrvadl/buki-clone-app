@@ -16,6 +16,7 @@ public interface IAdService
     public UserResponse Like(UserContext userContext, int id);
 
     public UserResponse Unlike(UserContext userContext, int id);
+    public UserResponse Delete(UserContext userContext, int id);
 }
 
 public class UserWithoutRelation
