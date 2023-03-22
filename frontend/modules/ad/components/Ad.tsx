@@ -7,13 +7,13 @@ import { Card, Text } from "react-native-paper";
 type Props = {
   ad: AdType;
   style?: ViewStyle;
-  onPress: (id: number) => void;
+  onPress?: (id: number) => void;
   onPressAvatar?: (id: number) => void;
 };
 
 const Ad = ({ ad, style, onPress, onPressAvatar }: Props) => {
   return (
-    <Card onPress={() => onPress(ad.id)} style={[style]}>
+    <Card onPress={() => onPress?.(ad.id)} style={[style]}>
       <Card.Cover
         resizeMode="cover"
         source={require("@/assets/ad-placeholder.jpg")}

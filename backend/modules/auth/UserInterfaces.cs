@@ -34,14 +34,11 @@ public class UserResponse : AuthUserDTO
     public string Name { get; set; } = null!;
     public string Token { get; set; } = null!;
     public IEnumerable<AdResponse> Favorites { get; set; } = null!;
-}
 
-// public class GetUserResponse : UserDTO
-// {
-//     public string Name { get; set; } = null!;
-//     public AdRe Ads
-//     public List<ReviewEntity> Reviews { get; set; } = null!;
-// }
+    public List<AdEntity> Ads { get; set; } = null!;
+    public List<ReviewEntity> RecievedReviews { get; set; } = null!;
+
+}
 
 public interface SignUpResponse
 {

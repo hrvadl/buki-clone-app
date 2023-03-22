@@ -44,4 +44,19 @@ public class ReviewService : IReviewService
 
         return newReview;
     }
+
+    public ReviewEntity Delete(UserContext ctx, int id)
+    {
+        var reviewee = this.dbCtx.Users.First(u => u.Email == ctx.Email);
+        if (reviewee is null) throw new ValidationException("Reviewee is not found");
+
+        var review = this.dbCtx.Reviews.First(r => r.Reviewee.Email == ctx.Email && r.Id == id);
+        if (review is null) throw new ValidationException("Review is not found");
+
+        reviewee.RecievedReviews.Remove(review);
+
+        this.dbCtx.SaveChanges();
+
+        return review;
+    }
 }

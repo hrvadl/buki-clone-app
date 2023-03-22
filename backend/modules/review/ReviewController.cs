@@ -27,4 +27,12 @@ public class ReviewController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete([FromServices] UserContext ctx, int id)
+    {
+        var result = this.reviewService.Delete(ctx, id);
+
+        return Ok(result);
+    }
 }

@@ -6,6 +6,8 @@ public interface IReviewService
     public List<ReviewEntity> GetAll(int id);
 
     public ReviewEntity Add(ReviewDTO review, UserContext ctx);
+    public ReviewEntity Delete(UserContext ctx, int id);
+
 }
 
 public class ReviewDTO

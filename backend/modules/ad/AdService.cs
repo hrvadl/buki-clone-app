@@ -105,4 +105,30 @@ public class AdService : IAdService
         };
         return response;
     }
+
+    public UserResponse Delete(UserContext userCtx, int id)
+    {
+        var user = this.dbContext.Users.Include(u => u.Favorites).ThenInclude(p => p.Author).FirstOrDefault(e => e.Email == userCtx.Email);
+
+        if (user is null) throw new ValidationException("User cannot be found");
+
+        var ad = this.dbContext.Ads.FirstOrDefault(e => e.Id == id && e.Author.Email == userCtx.Email);
+
+        if (ad is null) throw new ValidationException("Ad cannot be found");
+
+        user.Ads.Remove(ad);
+        this.dbContext.SaveChanges();
+
+        var response = new UserResponse
+        {
+            Favorites = user.Favorites.ToList().ConvertAll(e => new AdResponse(e)),
+            Email = user.Email,
+            Name = user.Name,
+            Password = user.Password,
+            Role = user.Role,
+        };
+
+        return response;
+    }
+
 }

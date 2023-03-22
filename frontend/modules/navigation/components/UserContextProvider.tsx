@@ -13,7 +13,7 @@ const UserContextProvider = ({ children }: Props) => {
     user: null,
   });
 
-  function setUser(user: User) {
+  function setUser(user: User | null) {
     setUserData({ ...userData, user });
   }
 
