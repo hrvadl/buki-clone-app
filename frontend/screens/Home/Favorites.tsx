@@ -1,6 +1,6 @@
 import Container from "@/design/container/Container";
 import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
-import { FavoritesList, NotFound } from "@/modules/favorites";
+import { FavoritesList, NotFoundFavorites } from "@/modules/favorites";
 import { UserContext } from "@/modules/navigation/context/user-context";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -22,7 +22,7 @@ const Favorites = () => {
         {user?.favorites?.length ? (
           <FavoritesList ad={user.favorites} />
         ) : (
-          <NotFound />
+          <NotFoundFavorites />
         )}
       </Container>
     </View>
