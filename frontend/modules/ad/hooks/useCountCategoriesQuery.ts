@@ -16,20 +16,18 @@ export default function useCountCategoriesQuery() {
   });
 
   const normalizedData = useMemo(() => {
-    return !data
-      ? ([] as CategoryAndIcon[])
-      : (Object.keys(initialData) as (keyof typeof Subject)[]).reduce(
-          (acc, key) => {
-            acc.push({
-              name: key,
-              adQuantity: initialData[key],
-              icon: require("@/assets/science.png"),
-            });
+    return (Object.keys(initialData) as (keyof typeof Subject)[]).reduce(
+      (acc, key) => {
+        acc.push({
+          name: key,
+          adQuantity: initialData[key] ?? 0,
+          icon: require("@/assets/science.png"),
+        });
 
-            return acc;
-          },
-          [] as CategoryAndIcon[]
-        );
+        return acc;
+      },
+      [] as CategoryAndIcon[]
+    );
   }, [data?.length ?? 0]);
 
   return { data: normalizedData, error };

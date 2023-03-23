@@ -99,4 +99,12 @@ public class UserService : IUserService
 
         return user;
     }
+
+
+    public List<UserEntity> Find(UserContext userContext, string search)
+    {
+        var users = this.context.Users.Where(a => (a.Name.ToLower().Contains(search.ToLower()) || a.Email.ToLower().Contains(search.ToLower())) && a.Role != userContext.Role);
+
+        return users.ToList();
+    }
 }

@@ -1,4 +1,5 @@
 import Container from "@/design/container/Container";
+import NotFound from "@/design/NotFound";
 import { Text } from "@/design/Text";
 import GoBackTopBar from "@/design/top-bar/GoBackTopBar";
 import { UserContext } from "@/modules/navigation/context/user-context";
@@ -49,11 +50,25 @@ const Profile = ({ navigation, route }: Props) => {
           <Text style={styles.AdsHeading} variant="titleLarge">
             User's ads
           </Text>
-          <UserByIdAds ads={data.ads ?? []} />
+          {data.ads?.length ? (
+            <UserByIdAds ads={data.ads} />
+          ) : (
+            <NotFound
+              title="Not found"
+              subtitle="Seems like user has posted nothing yet..."
+            />
+          )}
           <Text style={styles.ReviewsHeading} variant="titleLarge">
             Reviews
           </Text>
-          <ReviewsList reviews={data.recievedReviews ?? []} />
+          {data.recievedReviews?.length ? (
+            <ReviewsList reviews={data.recievedReviews} />
+          ) : (
+            <NotFound
+              title="Not found"
+              subtitle="Seems like user has received nothing yet..."
+            />
+          )}
           <LeftReview user={data} />
         </Container>
       )}

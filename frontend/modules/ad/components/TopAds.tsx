@@ -1,3 +1,4 @@
+import NotFound from "@/design/NotFound";
 import { Text } from "@/design/Text";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -28,7 +29,7 @@ const TopAds = ({ style }: Props) => {
       ) : null}
       {isLoading && !error ? (
         <ActivityIndicator size="small" />
-      ) : (
+      ) : data.length > 0 ? (
         <FlatList
           contentContainerStyle={{
             paddingVertical: 10,
@@ -46,6 +47,11 @@ const TopAds = ({ style }: Props) => {
               ad={ad}
             />
           )}
+        />
+      ) : (
+        <NotFound
+          title="There's not top ads"
+          subtitle="Something probably went wrong..."
         />
       )}
     </View>

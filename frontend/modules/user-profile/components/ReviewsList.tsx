@@ -14,7 +14,7 @@ const ReviewsList = ({ reviews, style }: Props) => {
   return (
     <View style={style}>
       {reviews.map((it) => (
-        <ReviewCard style={{ marginBottom: 10 }} review={it} />
+        <ReviewCard key={it.id} style={{ marginBottom: 10 }} review={it} />
       ))}
     </View>
   );

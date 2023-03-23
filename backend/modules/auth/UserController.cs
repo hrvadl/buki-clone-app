@@ -7,19 +7,19 @@ namespace buki_api.modules.auth;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly IUserService authService;
+    private readonly IUserService userService;
     private readonly ITokenService tokenService;
     public UserController(IUserService authService, ITokenService tokenService)
     {
         this.tokenService = tokenService;
-        this.authService = authService;
+        this.userService = authService;
     }
 
     [AllowAnonymous]
     [HttpPost("auth/sign-up")]
     public ActionResult<SignUpResponse> SignUp([FromBody] SignUpUserDTO user)
     {
-        var result = this.authService.SignUp(user);
+        var result = this.userService.SignUp(user);
 
         return result ? Ok(new SignUpRes(true)) : BadRequest(new SignUpRes(false));
     }
@@ -28,7 +28,7 @@ public class UserController : ControllerBase
     [HttpPost("auth/log-in")]
     public async Task<IActionResult> LogIn([FromBody] AuthUserDTO user)
     {
-        var result = await this.authService.LogIn(user);
+        var result = await this.userService.LogIn(user);
         return Ok(result);
     }
 
@@ -36,14 +36,24 @@ public class UserController : ControllerBase
     [HttpGet("auth")]
     public async Task<IActionResult> CheckToken([FromServices] UserContext userContext)
     {
-        var result = await this.authService.CheckToken(userContext);
+        var result = await this.userService.CheckToken(userContext);
         return Ok(result);
     }
     [Authorize]
     [HttpGet("{id}")]
     public IActionResult GetById([FromServices] UserContext userContext, int id)
     {
-        var result = this.authService.GetUser(userContext, id);
+        var result = this.userService.GetUser(userContext, id);
         return Ok(result);
+    }
+
+
+    [Authorize]
+    [HttpGet("search")]
+    public IActionResult Find([FromQuery(Name = "name")] string name, [FromServices] UserContext userContext)
+    {
+        var res = this.userService.Find(userContext, name);
+
+        return Ok(res);
     }
 }
