@@ -1,3 +1,4 @@
+import NotFound from "@/design/NotFound";
 import { RootStackParamList } from "@/modules/navigation/types/root-stack";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -22,7 +23,7 @@ const LatestAds = ({ style }: Props) => {
       </Text>
       {!data || isLoading ? (
         <ActivityIndicator />
-      ) : (
+      ) : data.length > 0 ? (
         data.map((ad) => (
           <Ad
             key={ad.id}
@@ -34,6 +35,11 @@ const LatestAds = ({ style }: Props) => {
             ad={ad}
           />
         ))
+      ) : (
+        <NotFound
+          title="There's not latest ads"
+          subtitle="Something probably went wrong..."
+        />
       )}
     </View>
   );

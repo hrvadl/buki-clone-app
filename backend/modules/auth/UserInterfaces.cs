@@ -10,6 +10,7 @@ public interface IUserService
     public bool SignUp(SignUpUserDTO user);
     public Task<UserResponse> CheckToken(UserContext userContext);
     public UserEntity GetUser(UserContext userContext, int id);
+    public List<UserEntity> Find(UserContext userContext, string search);
 }
 
 public class UserDTO
