@@ -1,0 +1,24 @@
+services:
+  database:
+    image: mysql:latest
+    container_name: database
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - .env
+    volumes:
+      - buki-database:/var/lib/mysql
+  api-dev-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/server
+    command: sleep infinity
+    user: root
+    network_mode: service:database
+    depends_on:
+      - database
+
+volumes:
+  buki-database:
+    driver: local
