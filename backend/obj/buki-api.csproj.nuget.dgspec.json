@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/backend/buki-api.csproj": {}
+    "C:\\Users\\omgto\\Desktop\\buki\\backend\\buki-api.csproj": {}
   },
   "projects": {
-    "/backend/buki-api.csproj": {
+    "C:\\Users\\omgto\\Desktop\\buki\\backend\\buki-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/backend/buki-api.csproj",
+        "projectUniqueName": "C:\\Users\\omgto\\Desktop\\buki\\backend\\buki-api.csproj",
         "projectName": "buki-api",
-        "projectPath": "/backend/buki-api.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/backend/obj/",
+        "projectPath": "C:\\Users\\omgto\\Desktop\\buki\\backend\\buki-api.csproj",
+        "packagesPath": "C:\\Users\\omgto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\omgto\\Desktop\\buki\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\omgto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,6 +66,10 @@
               "target": "Package",
               "version": "[7.0.3, )"
             },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -98,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
