@@ -53,6 +53,7 @@ public class AdService : IAdService
     public AdResponse GetById(int id)
     {
         var ad = this.dbContext.Ads.Include(e => e.Author).FirstOrDefault(e => e.Id == id);
+        if (ad is null) throw new NotFoundException("Not found");
 
         return new AdResponse(ad!);
     }

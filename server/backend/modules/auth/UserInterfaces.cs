@@ -6,9 +6,9 @@ namespace buki_api.modules.auth;
 
 public interface IUserService
 {
-    public Task<UserResponse> LogIn(AuthUserDTO user);
+    public UserResponse LogIn(AuthUserDTO user);
     public bool SignUp(SignUpUserDTO user);
-    public Task<UserResponse> CheckToken(UserContext userContext);
+    public UserResponse CheckToken(UserContext userContext);
     public UserEntity GetUser(UserContext userContext, int id);
     public List<UserEntity> Find(UserContext userContext, string search);
 }

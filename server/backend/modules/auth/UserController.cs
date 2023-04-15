@@ -26,17 +26,17 @@ public class UserController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("auth/log-in")]
-    public async Task<IActionResult> LogIn([FromBody] AuthUserDTO user)
+    public IActionResult LogIn([FromBody] AuthUserDTO user)
     {
-        var result = await this.userService.LogIn(user);
+        var result = this.userService.LogIn(user);
         return Ok(result);
     }
 
     [Authorize]
     [HttpGet("auth")]
-    public async Task<IActionResult> CheckToken([FromServices] UserContext userContext)
+    public IActionResult CheckToken([FromServices] UserContext userContext)
     {
-        var result = await this.userService.CheckToken(userContext);
+        var result = this.userService.CheckToken(userContext);
         return Ok(result);
     }
     [Authorize]

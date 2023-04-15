@@ -1,0 +1,18 @@
+name: GitHub Actions Deployment
+run-name: ${{ github.actor }} is pushing to master 🚀
+on: 
+  push: 
+    branches:
+      - "main"
+jobs:
+  run-dotnet-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '7.0.x' ]
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run tests
+        run: "cd ./server/tests && dotnet test"

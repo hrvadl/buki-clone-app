@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using buki_api.entities;
 using buki_api.modules.auth;
 using Microsoft.IdentityModel.Tokens;
 

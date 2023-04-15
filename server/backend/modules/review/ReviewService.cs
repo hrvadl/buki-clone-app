@@ -22,11 +22,11 @@ public class ReviewService : IReviewService
 
     public ReviewEntity Add(ReviewDTO review, UserContext ctx)
     {
-        var reviewee = this.dbCtx.Users.Include(r => r.RecievedReviews).First(r => r.Id == review.RevieweeId);
+        var reviewee = this.dbCtx.Users.Include(r => r.RecievedReviews).FirstOrDefault(r => r.Id == review.RevieweeId);
 
         if (reviewee is null) throw new ValidationException("Reviewee not found");
 
-        var reviewer = this.dbCtx.Users.Include(r => r.GivenReviews).First(e => e.Email == ctx.Email);
+        var reviewer = this.dbCtx.Users.Include(r => r.GivenReviews).FirstOrDefault(e => e.Email == ctx.Email);
 
         if (reviewer is null) throw new ValidationException("Reviewer not found");
 
@@ -47,10 +47,10 @@ public class ReviewService : IReviewService
 
     public ReviewEntity Delete(UserContext ctx, int id)
     {
-        var reviewee = this.dbCtx.Users.First(u => u.Email == ctx.Email);
+        var reviewee = this.dbCtx.Users.FirstOrDefault(u => u.Email == ctx.Email);
         if (reviewee is null) throw new ValidationException("Reviewee is not found");
 
-        var review = this.dbCtx.Reviews.First(r => r.Reviewee.Email == ctx.Email && r.Id == id);
+        var review = this.dbCtx.Reviews.FirstOrDefault(r => r.Reviewee.Email == ctx.Email && r.Id == id);
         if (review is null) throw new ValidationException("Review is not found");
 
         reviewee.RecievedReviews.Remove(review);
