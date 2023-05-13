@@ -1,11 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-  "name": "C# (.NET) and MySQL",
+  "name": "csharp_mysql",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "dockerComposeFile": "./docker-compose.yml",
   "service": "api-dev-container",
-  "workspaceFolder": "/server",
+  "workspaceFolder": "/usr/local/buki-app",
   "remoteUser": "root",
   "features": {
     "ghcr.io/devcontainers/features/dotnet:1": {},

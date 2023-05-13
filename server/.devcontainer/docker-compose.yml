@@ -9,10 +9,10 @@ services:
       - buki-database:/var/lib/mysql
   api-dev-container:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: ./.devcontainer/Dockerfile
     volumes:
-      - ../:/server
+      - ../:/usr/local/buki-app/server
     command: sleep infinity
     user: root
     network_mode: service:database
