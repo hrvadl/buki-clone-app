@@ -1,20 +1,31 @@
 services:
   prod-database:
     image: mysql:latest
-    container_name: database
+    env_file:
+      - .env
+    container_name: prod-database
     command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
     volumes:
       - prod-database:/var/lib/mysql
+    networks:
+      - buki-network
   api:
-    build:
-      context: ./server
-      dockerfile: ./server/Dockerfile
-    network_mode: service:prod-database
+    image: w6d6g6/buki-clone
+    container_name: prod-api
+    env_file:
+      - .env
+    ports:
+      - "8080:80"
     depends_on:
       - prod-database
+    networks:
+      - buki-network
 
 volumes:
   prod-database:
     driver: local
 
-#Server=localhost;Database=buki;Uid=root;Pwd=secret;
+networks:
+  buki-network:

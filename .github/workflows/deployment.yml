@@ -1,16 +1,16 @@
 name: GitHub Actions Deployment
 run-name: ${{ github.actor }} is pushing to master 🚀
-on: 
-  push: 
+on:
+  push:
     branches:
       - "main"
 
 jobs:
-  run-dotnet-tests:
+  deploy-main:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '7.0.x' ]
+        dotnet-version: ["7.0.x"]
 
     steps:
       - name: Check out repository code
@@ -18,16 +18,23 @@ jobs:
       - name: Run tests
         run: "cd ./server/tests && dotnet test"
       - name: Login to docker hub
-        env: 
+        env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the docker image
-        run : cd ./server && docker build -t "${{ secrets.REPO }}:latest" .
+        run: cd ./server && docker build -t "${{ secrets.REPO }}:latest" .
       - name: Push the docker image
         run: docker push ${{ secrets.REPO }}
-      - name: Deploy docker container webhook
-        uses: joelwmale/webhook-action@master
-        env:
-          WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL  }}
+      - name: Setup SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: Copy docker compose file
+        run: scp docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}
+      - name: Connect, pull and redeploy
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash ${{ secrets.WORK_SCRIPT }} && exit"
+      - name: Cleanup SSH keys
+        run: rm -rf ~/.ssh
