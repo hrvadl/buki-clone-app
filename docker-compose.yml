@@ -29,3 +29,4 @@ volumes:
 
 networks:
   buki-network:
+    driver: bridge
