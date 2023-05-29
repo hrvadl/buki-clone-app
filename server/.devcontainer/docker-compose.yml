@@ -3,6 +3,8 @@ services:
     image: mysql:latest
     container_name: database
     command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - buki-dev
     env_file:
       - .env
     volumes:
@@ -15,10 +17,16 @@ services:
       - ../:/usr/local/buki-app/server
     command: sleep infinity
     user: root
-    network_mode: service:database
+    networks:
+      - buki-dev
+    ports:
+      - "5127:5127"
     depends_on:
       - database
 
 volumes:
   buki-database:
     driver: local
+
+networks:
+  buki-dev:
