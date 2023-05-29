@@ -10,7 +10,5 @@ export const addAd = async (data: AdInput) => {
 
   if (!isAd(res)) throw new Error("Something went wrong");
 
-  console.log(res);
-
   return res;
 };
