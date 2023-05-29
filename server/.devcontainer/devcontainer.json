@@ -33,8 +33,7 @@
         "ms-dotnettools.csharp",
         "adrianwilczynski.namespace",
         "Fudge.auto-using",
-        "dbaeumer.vscode-eslint",
-        "cweijan.vscode-database-client2"
+        "dbaeumer.vscode-eslint"
       ]
     }
   },
